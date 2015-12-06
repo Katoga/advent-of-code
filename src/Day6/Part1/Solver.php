@@ -35,22 +35,15 @@ class Solver implements SolverInterface
 	{
 		ini_set('memory_limit', '1G');
 
-		$this->log(PHP_EOL);
-
-		$this->logMemoryUsage('start');
-
 		$this->initGrid();
-
-		$this->logMemoryUsage();
 
 		$commands = explode(PHP_EOL, $input);
 
 		foreach ($commands as $command) {
 			try {
-				$this->logMemoryUsage();
 				$this->runCommand($command);
 			} catch (\RuntimeException $e) {
-				$this->log($e->getMessage());
+				// TODO where to log it?
 			}
 		}
 
@@ -72,11 +65,8 @@ class Solver implements SolverInterface
 	{
 		$commandParts = $this->parseCommand($command);
 
-		$this->logMemoryUsage();
-
 		for ($x = $commandParts['x1']; $x <= $commandParts['x2']; $x++) {
 			for ($y = $commandParts['y1']; $y <= $commandParts['y2']; $y++) {
-				$this->logMemoryUsage($x . '/' . $y);
 				$this->{$commandParts['cmd']}($x, $y);
 			}
 		}
@@ -157,23 +147,5 @@ class Solver implements SolverInterface
 		}
 
 		return $cnt;
-	}
-
-	protected function log($msg)
-	{
-		file_put_contents('/tmp/ktg.dbg', $msg . PHP_EOL, FILE_APPEND);
-	}
-
-	protected function logMemoryUsage($prefix = '')
-	{
-		$msg = '';
-
-		if ($prefix) {
-			$msg = $prefix . ' ';
-		}
-
-		$msg .= memory_get_usage();
-
-		$this->log($msg);
 	}
 }
