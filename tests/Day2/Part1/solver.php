@@ -1,0 +1,16 @@
+<?php
+
+use Tester\Assert;
+
+require_once __DIR__ . '/../../bootstrap.php';
+
+$solver = new AdventOfCode\Day2\Part1\Solver();
+
+$data = [
+	'2x3x4' => 58,
+	'1x1x10' => 43
+];
+
+foreach ($data as $input => $expected) {
+	Assert::equal($expected, $solver->getAmountOfPaper($input));
+}
