@@ -1,13 +1,15 @@
 <?php
 namespace AdventOfCode\Day2\Part1;
 
+use AdventOfCode\SolverInterface;
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Solver
+class Solver implements SolverInterface
 {
 	const DIMENSIONS_SEPARATOR = 'x';
 
@@ -16,7 +18,7 @@ class Solver
 	 * @param string $input
 	 * @return int
 	 */
-	public function getAmountOfPaper($input)
+	public function getSolution($input)
 	{
 		$boxes = explode(PHP_EOL, $input);
 

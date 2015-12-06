@@ -12,5 +12,5 @@ $data = [
 ];
 
 foreach ($data as $input => $expected) {
-	Assert::equal($expected, $solver->getAmountOfPaper($input));
+	Assert::equal($expected, $solver->getSolution($input));
 }

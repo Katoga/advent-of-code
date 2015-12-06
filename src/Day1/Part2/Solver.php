@@ -1,13 +1,15 @@
 <?php
 namespace AdventOfCode\Day1\Part2;
 
+use AdventOfCode\SolverInterface;
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Solver
+class Solver implements SolverInterface
 {
 	const FLOOR_UP = '(';
 
@@ -18,7 +20,7 @@ class Solver
 	 * @param string $input
 	 * @return int
 	 */
-	public function getStep($input)
+	public function getSolution($input)
 	{
 		$floor = 0;
 		$chars = str_split($input);

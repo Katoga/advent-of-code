@@ -15,5 +15,5 @@ $data = [
 ];
 
 foreach ($data as $input => $expected) {
-	Assert::equal($expected, $solver->getStep($input));
+	Assert::equal($expected, $solver->getSolution($input));
 }
