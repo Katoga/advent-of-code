@@ -14,36 +14,24 @@ class Solver implements SolverInterface
 
 	/**
 	 *
-	 * @var string
-	 */
-	protected $secretKey;
-
-	/**
-	 *
 	 * @param string $input
 	 * @return int
 	 */
 	public function getSolution($input)
 	{
-		$this->secretKey = $input;
-
-		// result from Day4, Part1
+			// result from Day4, Part1
 		$number = 282749;
 
-		while (!$this->hashStartsWithSixZeroes($number)) {
+		$string = '';
+
+		do {
 			$number++;
-		}
+			$string = substr(md5($input . $number), 0, 6);
+			if ($number % 1000000 == 0) {
+				echo $number . PHP_EOL;
+			}
+		} while ($string !== '000000');
 
 		return $number;
-	}
-
-	protected function hashStartsWithSixZeroes($number)
-	{
-		$string = sprintf('%s%d', $this->secretKey, $number);
-		$hash = md5($string);
-
-		$chunk = substr($hash, 0, 5);
-
-		return $chunk === '000000';
 	}
 }
