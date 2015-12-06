@@ -1,0 +1,19 @@
+{
+	"name": "katoga/advent-of-code",
+	"type": "project",
+	"authors": [
+		{
+			"name": "Katoga",
+			"email": "katoga.cz@hotmail.com"
+		}
+	],
+	"license": "ISC",
+	"require-dev": {
+		"nette/tester": "1.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"AdventOfCode\\": "src/"
+		}
+	}
+}
