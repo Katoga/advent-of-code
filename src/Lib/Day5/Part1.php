@@ -1,7 +1,7 @@
 <?php
-namespace AdventOfCode\Day5\Part1;
+namespace AdventOfCode\Lib\Day5;
 
-use AdventOfCode\SolverInterface;
+use AdventOfCode\Lib\SolverInterface;
 
 /**
  *
@@ -9,7 +9,7 @@ use AdventOfCode\SolverInterface;
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Solver implements SolverInterface
+class Part1 implements SolverInterface
 {
 
 	/**

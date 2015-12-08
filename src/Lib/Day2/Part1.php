@@ -1,14 +1,15 @@
 <?php
-namespace AdventOfCode\Day2\Part2;
+namespace AdventOfCode\Lib\Day2;
 
-use AdventOfCode\SolverInterface;
+use AdventOfCode\Lib\SolverInterface;
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Solver implements SolverInterface
+class Part1 implements SolverInterface
 {
 	const DIMENSIONS_SEPARATOR = 'x';
 
@@ -21,12 +22,12 @@ class Solver implements SolverInterface
 	{
 		$boxes = explode(PHP_EOL, $input);
 
-		$ribbon = 0;
+		$paper = 0;
 		foreach ($boxes as $boxDimensions) {
-			$ribbon += $this->getRibbonForBox($boxDimensions);
+			$paper += $this->getPaperForBox($boxDimensions);
 		}
 
-		return $ribbon;
+		return $paper;
 	}
 
 	/**
@@ -34,16 +35,16 @@ class Solver implements SolverInterface
 	 * @param string $boxDimensions
 	 * @return int
 	 */
-	protected function getRibbonForBox($boxDimensions)
+	protected function getPaperForBox($boxDimensions)
 	{
 		$dimensions = explode(self::DIMENSIONS_SEPARATOR, $boxDimensions);
 
 		sort($dimensions, SORT_NUMERIC);
 		list($width, $length, $height) = $dimensions;
 
-		$wrap = 2 * $width + 2 * $length;
-		$bow = $width * $length * $height;
+		$wrap = 2 * $width * $length + 2 * $width * $height + 2 * $length * $height;
+		$slack = $width * $length;
 
-		return $wrap + $bow;
+		return $wrap + $slack;
 	}
 }

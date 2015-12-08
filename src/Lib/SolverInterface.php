@@ -1,5 +1,5 @@
 <?php
-namespace AdventOfCode;
+namespace AdventOfCode\Lib;
 
 /**
  *

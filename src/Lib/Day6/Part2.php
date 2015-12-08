@@ -1,7 +1,7 @@
 <?php
-namespace AdventOfCode\Day6\Part2;
+namespace AdventOfCode\Lib\Day6;
 
-use AdventOfCode\SolverInterface;
+use AdventOfCode\Lib\SolverInterface;
 
 /**
  *
@@ -9,7 +9,7 @@ use AdventOfCode\SolverInterface;
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Solver implements SolverInterface
+class Part2 implements SolverInterface
 {
 
 	const GRID_SIZE = 1000;
