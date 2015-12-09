@@ -2,13 +2,13 @@
 
 use Tester\Assert;
 
-require_once __DIR__ . '/../../bootstrap.php';
+require_once __DIR__ . '/../bootstrap.php';
 
-$solver = new AdventOfCode\Lib\Day2\Part1();
+$solver = new AdventOfCode\Lib\Day2\Part2();
 
 $data = [
-	'2x3x4' => 58,
-	'1x1x10' => 43
+	'2x3x4' => 34,
+	'1x1x10' => 14
 ];
 
 foreach ($data as $input => $expected) {
