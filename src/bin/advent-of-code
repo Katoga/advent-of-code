@@ -17,8 +17,9 @@ $commands = [
 	new Command\Day1\Part2(new AdventOfCode\Lib\Day1\Part2()),
 	new Command\Day2\Part1(new AdventOfCode\Lib\Day2\Part1()),
 	new Command\Day2\Part2(new AdventOfCode\Lib\Day2\Part2()),
-	//new Command\Day3\Part1(),
-	//new Command\Day3\Part2(),
+	new Command\Day3\Part1(new AdventOfCode\Lib\Day3\Part1()),
+	new Command\Day3\Part2(new AdventOfCode\Lib\Day3\Part2()),
+
 	//new Command\Day4\Part1(),
 	//new Command\Day4\Part2(),
 	//new Command\Day5\Part1(),
