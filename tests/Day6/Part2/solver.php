@@ -4,7 +4,7 @@ use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-$solver = new AdventOfCode\Day6\Part2\Solver();
+$solver = new AdventOfCode\Lib\Day6\Part2();
 
 $data = [
 	'turn on 0,0 through 0,0' => 1,

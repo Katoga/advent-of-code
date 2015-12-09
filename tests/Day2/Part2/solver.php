@@ -4,7 +4,7 @@ use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-$solver = new AdventOfCode\Day2\Part2\Solver();
+$solver = new AdventOfCode\Lib\Day2\Part2();
 
 $data = [
 	'2x3x4' => 34,

@@ -4,7 +4,7 @@ use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-$solver = new AdventOfCode\Day1\Part1\Solver();
+$solver = new AdventOfCode\Lib\Day1\Part1();
 
 $data = [
 	'(())' => 0,
