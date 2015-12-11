@@ -1,5 +1,7 @@
 <?php
-namespace AdventOfCode\Command;
+namespace AdventOfCode\Command\Day1;
+
+use AdventOfCode\Command\Commons;
 
 /**
  *
@@ -7,7 +9,7 @@ namespace AdventOfCode\Command;
  * @since 2015-12-08
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-abstract class Day1 extends Commons
+abstract class Common extends Commons
 {
 	const DESCRIPTION = 'Not Quite Lisp';
 }

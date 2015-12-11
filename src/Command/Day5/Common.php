@@ -1,5 +1,7 @@
 <?php
-namespace AdventOfCode\Command;
+namespace AdventOfCode\Command\Day5;
+
+use AdventOfCode\Command\Commons;
 
 /**
  *
@@ -7,7 +9,7 @@ namespace AdventOfCode\Command;
  * @since 2015-12-09
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-abstract class Day5 extends Commons
+abstract class Common extends Commons
 {
 	const DESCRIPTION = 'Doesn\'t He Have Intern-Elves For This?';
 
