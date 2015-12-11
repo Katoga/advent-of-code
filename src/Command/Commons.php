@@ -72,7 +72,7 @@ abstract class Commons extends Command
 	 */
 	public function execute(InputInterface $input, OutputInterface $output)
 	{
-		$output->writeln(sprintf('%s: %d', $this->getSolutionMessage(), $this->solver->getSolution($this->inputData)));
+		$output->writeln(sprintf('%s: %d', $this->getSolutionMessage(), $this->getSolution()));
 	}
 
 	/**
@@ -91,6 +91,15 @@ abstract class Commons extends Command
 	protected function getSolutionMessage()
 	{
 		return static::SOLUTION_MESSAGE;
+	}
+
+	/**
+	 *
+	 * @return int
+	 */
+	protected function getSolution()
+	{
+		return $this->solver->getSolution($this->inputData);
 	}
 
 	/**

@@ -27,6 +27,7 @@ $expected = [
 ];
 
 foreach ($expected as $wire => $signal) {
-	$solver = new AdventOfCode\Lib\Day7\Part1($wire);
+	$solver = new AdventOfCode\Lib\Day7\Part1();
+	$solver->setOutputWire($wire);
 	Assert::equal($signal, $solver->getSolution($input));
 }

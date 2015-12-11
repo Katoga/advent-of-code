@@ -9,9 +9,10 @@ namespace AdventOfCode\Lib\Day7;
  */
 interface SolverInterface extends \AdventOfCode\Lib\SolverInterface
 {
+
 	/**
 	 *
-	 * @return string
+	 * @param string $outputWire
 	 */
-	public function getOutputWire();
+	public function setOutputWire($outputWire);
 }

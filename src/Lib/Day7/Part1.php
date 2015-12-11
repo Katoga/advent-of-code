@@ -32,17 +32,8 @@ class Part1 implements SolverInterface
 
 	/**
 	 *
-	 * @param string $outputWire
-	 */
-	public function __construct($outputWire)
-	{
-		$this->outputWire = $outputWire;
-	}
-
-	/**
-	 *
-	 * @param string $input
-	 * @return int
+	 * {@inheritDoc}
+	 * @see \AdventOfCode\Lib\SolverInterface::getSolution()
 	 */
 	public function getSolution($input)
 	{
@@ -54,11 +45,11 @@ class Part1 implements SolverInterface
 	/**
 	 *
 	 * {@inheritDoc}
-	 * @see \AdventOfCode\Lib\Day7\SolverInterface::getOutputWire()
+	 * @see \AdventOfCode\Lib\Day7\SolverInterface::setOutputWire()
 	 */
-	public function getOutputWire()
+	public function setOutputWire($outputWire)
 	{
-		return $this->outputWire;
+		$this->outputWire = $outputWire;
 	}
 
 	/**

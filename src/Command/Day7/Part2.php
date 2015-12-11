@@ -18,6 +18,6 @@ class Part2 extends Common
 	 */
 	protected function getSolutionMessage()
 	{
-		return sprintf(static::SOLUTION_MESSAGE, $this->solver->getOutputWire());
+		return sprintf(static::SOLUTION_MESSAGE, $this->outputWire);
 	}
 }

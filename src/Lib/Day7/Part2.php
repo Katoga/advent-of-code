@@ -40,15 +40,6 @@ class Part2 implements SolverInterface
 
 	/**
 	 *
-	 * @param string $outputWire
-	 */
-	public function __construct($outputWire)
-	{
-		$this->outputWire = $outputWire;
-	}
-
-	/**
-	 *
 	 * @param string $input
 	 * @return int
 	 */
@@ -62,11 +53,11 @@ class Part2 implements SolverInterface
 	/**
 	 *
 	 * {@inheritDoc}
-	 * @see \AdventOfCode\Lib\Day7\SolverInterface::getOutputWire()
+	 * @see \AdventOfCode\Lib\Day7\SolverInterface::setOutputWire()
 	 */
-	public function getOutputWire()
+	public function setOutputWire($outputWire)
 	{
-		return $this->outputWire;
+		$this->outputWire = $outputWire;
 	}
 
 	/**
