@@ -1,20 +1,14 @@
 <?php
 namespace AdventOfCode\Lib\Day1;
 
-use AdventOfCode\Lib\SolverInterface;
-
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part2 implements SolverInterface
+class Part2 extends Common
 {
-	const FLOOR_UP = '(';
-
-	const FLOOR_DOWN = ')';
-
 	/**
 	 *
 	 * @param string $input
