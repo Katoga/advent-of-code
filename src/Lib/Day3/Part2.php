@@ -1,21 +1,14 @@
 <?php
 namespace AdventOfCode\Lib\Day3;
 
-use AdventOfCode\Lib\SolverInterface;
-
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part2 implements SolverInterface
+class Part2 extends Common
 {
-	const STEP_NORTH = '^';
-	const STEP_SOUTH = 'v';
-	const STEP_EAST = '>';
-	const STEP_WEST = '<';
-
 	const SANTA = true;
 	const ROBOT = false;
 
@@ -28,12 +21,12 @@ class Part2 implements SolverInterface
 	{
 		// start at 0~0
 		$posX = [
-			self::SANTA => 0,
-			self::ROBOT => 0
+			(int) self::SANTA => 0,
+			(int) self::ROBOT => 0
 		];
 		$posY = [
-			self::SANTA => 0,
-			self::ROBOT => 0
+			(int) self::SANTA => 0,
+			(int) self::ROBOT => 0
 		];
 		$visited = [
 			sprintf('%d~%d', $posX[(int) self::SANTA], $posY[(int) self::SANTA]) => true
@@ -46,20 +39,7 @@ class Part2 implements SolverInterface
 
 		$steps = str_split($input);
 		foreach ($steps as $step) {
-			switch ($step) {
-				case self::STEP_NORTH:
-					$posY[$moving]++;
-					break;
-				case self::STEP_SOUTH:
-					$posY[$moving]--;
-					break;
-				case self::STEP_EAST:
-					$posX[$moving]++;
-					break;
-				case self::STEP_WEST:
-					$posX[$moving]--;
-					break;
-			}
+			list($posX[(int) $moving], $posY[(int) $moving]) = $this->doStep($step, $posX[(int) $moving], $posY[(int) $moving]);
 
 			$visited[sprintf('%d~%d', $posX[(int) $moving], $posY[(int) $moving])] = true;
 

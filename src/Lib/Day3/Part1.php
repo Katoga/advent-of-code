@@ -1,21 +1,14 @@
 <?php
 namespace AdventOfCode\Lib\Day3;
 
-use AdventOfCode\Lib\SolverInterface;
-
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part1 implements SolverInterface
+class Part1 extends Common
 {
-	const STEP_NORTH = '^';
-	const STEP_SOUTH = 'v';
-	const STEP_EAST = '>';
-	const STEP_WEST = '<';
-
 	/**
 	 *
 	 * @param string $input
@@ -32,20 +25,8 @@ class Part1 implements SolverInterface
 
 		$steps = str_split($input);
 		foreach ($steps as $step) {
-			switch ($step) {
-				case self::STEP_NORTH:
-					$posY++;
-					break;
-				case self::STEP_SOUTH:
-					$posY--;
-					break;
-				case self::STEP_EAST:
-					$posX++;
-					break;
-				case self::STEP_WEST:
-					$posX--;
-					break;
-			}
+			list($posX, $posY) = $this->doStep($step, $posX, $posY);
+
 			$visited[sprintf('%d~%d', $posX, $posY)] = true;
 		}
 
