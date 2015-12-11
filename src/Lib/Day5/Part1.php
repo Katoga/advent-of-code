@@ -1,15 +1,13 @@
 <?php
 namespace AdventOfCode\Lib\Day5;
 
-use AdventOfCode\Lib\SolverInterface;
-
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
  * @since 2015-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part1 implements SolverInterface
+class Part1 extends Common
 {
 
 	/**
@@ -33,22 +31,12 @@ class Part1 implements SolverInterface
 
 	/**
 	 *
-	 * @param string $input
-	 * @return int
+	 * {@inheritDoc}
+	 * @see \AdventOfCode\Lib\Day5\Common::isNiceWord()
 	 */
-	public function getSolution($input)
+	protected function isNiceWord($word)
 	{
-		$cnt = 0;
-
-		$words = explode(PHP_EOL, $input);
-
-		foreach ($words as $word) {
-			if ($this->hasThreeWovels($word) && $this->hasDoubleLetter($word) && $this->lacksBadSequence($word)) {
-				$cnt++;
-			}
-		}
-
-		return $cnt;
+		return $this->hasThreeWovels($word) && $this->hasDoubleLetter($word) && $this->lacksBadSequence($word);
 	}
 
 	/**
