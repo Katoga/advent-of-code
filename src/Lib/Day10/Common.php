@@ -40,6 +40,10 @@ abstract class Common implements SolverInterface
 	 */
 	public function setIterations($iterations)
 	{
+		if ($iterations > 40) {
+			ini_set('memory_limit', '1G');
+		}
+
 		$this->iterations = $iterations;
 	}
 

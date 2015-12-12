@@ -23,8 +23,6 @@ abstract class Common extends Commons
 
 	const OPTION_CYCLES_SHORT = 'c';
 
-	const DEFAULT_CYCLES = 40;
-
 	/**
 	 *
 	 * @var SolverInterface
