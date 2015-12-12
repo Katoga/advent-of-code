@@ -12,6 +12,4 @@ use AdventOfCode\Command\Commons;
 abstract class Common extends Commons
 {
 	const DESCRIPTION = 'All in a Single Night';
-
-	const SOLUTION_MESSAGE = 'Shortest route';
 }

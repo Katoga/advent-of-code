@@ -7,7 +7,7 @@ namespace AdventOfCode\Command\Day9;
  * @since 2015-12-12
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part1 extends Common
+class Part2 extends Common
 {
-	const SOLUTION_MESSAGE = 'Shortest route';
+	const SOLUTION_MESSAGE = 'Longest route';
 }

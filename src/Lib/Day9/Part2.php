@@ -7,7 +7,7 @@ namespace AdventOfCode\Lib\Day9;
  * @since 2015-12-12
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part1 extends Common
+class Part2 extends Common
 {
 	/**
 	 *
@@ -16,6 +16,6 @@ class Part1 extends Common
 	 */
 	protected function getResult(array $distances)
 	{
-		return min($distances);
+		return max($distances);
 	}
 }

@@ -31,8 +31,6 @@ abstract class Common implements SolverInterface
 	 */
 	public function getSolution($input)
 	{
-		$count = 0;
-
 		$routes = explode(PHP_EOL, $input);
 
 		foreach ($routes as $route) {
@@ -42,31 +40,9 @@ abstract class Common implements SolverInterface
 			}
 		}
 
-		$paths = $this->getPaths(array_keys($this->locations));
+		$distances = $this->getDistances();
 
-		$distances = [];
-
-		foreach ($paths as $path) {
-			$distance = 0;
-			$stepsCnt = count($path) - 1;
-
-			foreach ($path as $i => $startLocation) {
-				if ($i < $stepsCnt) {
-					$endLocation = $path[$i + 1];
-					$step = [
-						$startLocation,
-						$endLocation
-					];
-					sort($step);
-
-					$distanceKey = sprintf('%s %s', $step[0], $step[1]);
-					$distance += $this->distances[$distanceKey];
-				}
-			}
-			$distances[] = $distance;
-		}
-
-		return min($distances);
+		return $this->getResult($distances);
 	}
 
 	/**
@@ -117,4 +93,44 @@ abstract class Common implements SolverInterface
 			return $this->permutations;
 		}
 	}
+
+	/**
+	 *
+	 * @return array
+	 */
+	protected function getDistances()
+	{
+		$paths = $this->getPaths(array_keys($this->locations));
+
+		$distances = [];
+
+		foreach ($paths as $path) {
+			$distance = 0;
+			$stepsCnt = count($path) - 1;
+
+			foreach ($path as $i => $startLocation) {
+				if ($i < $stepsCnt) {
+					$endLocation = $path[$i + 1];
+					$step = [
+						$startLocation,
+						$endLocation
+					];
+					sort($step);
+
+					$distanceKey = sprintf('%s %s', $step[0], $step[1]);
+					$distance += $this->distances[$distanceKey];
+				}
+			}
+			$distances[] = $distance;
+		}
+
+		return $distances;
+	}
+
+	/**
+	 *
+	 * @param array $distances
+	 * @return int
+	 */
+	abstract protected function getResult(array $distances);
 }
