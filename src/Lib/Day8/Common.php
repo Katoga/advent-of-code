@@ -23,20 +23,13 @@ abstract class Common implements SolverInterface
 		$lines = explode(PHP_EOL, $input);
 
 		foreach ($lines as $line) {
-			$count += $this->getCharsCnt($line);
+			$line = trim($line);
+			if (!empty($line)) {
+				$count += $this->getCharsCnt($line);
+			}
 		}
 
 		return $count;
-	}
-
-	/**
-	 *
-	 * @param string $line
-	 * @return int
-	 */
-	protected function getCharsCnt($line)
-	{
-		return $this->getLiteralsLength($line) - $this->getStringLength($line);
 	}
 
 	/**
@@ -50,24 +43,8 @@ abstract class Common implements SolverInterface
 	}
 
 	/**
-	 *
-	 * @param string $string
+	 * @param string $line
 	 * @return int
 	 */
-	protected function getStringLength($string)
-	{
-		// remove enclosing double quotes
-		$string = trim($string, '"');
-
-		// replace escaped double quote with the double quote itself
-		$string = str_replace('\"', '"', $string);
-
-		// replace escaped backslash with the backslash itself
-		$string = str_replace('\\\\', '\\', $string);
-
-		// decode hexadecimal char
-		$string = preg_replace_callback('~\\\x(?<ord>[a-f0-9]{2})~', function($matches) {return chr(hexdec($matches['ord']));}, $string);
-
-		return strlen($string);
-	}
+	abstract protected function getCharsCnt($line);
 }

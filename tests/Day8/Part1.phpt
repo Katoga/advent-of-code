@@ -7,7 +7,7 @@ require_once __DIR__ . '/../bootstrap.php';
 $solver = new AdventOfCode\Lib\Day8\Part1();
 
 $data = [
-/*<<<'EOI'
+<<<'EOI'
 ""
 "abc"
 "aaa\"aaa"
@@ -26,11 +26,11 @@ EOI3
 "\\"
 "\"\\"
 EOI3
-	=> 7,*/
+	=> 7,
 	<<<'EOI4'
 "kwdlysf\\xjpelae"
 EOI4
-	=> 18 - 15
+	=> 3
 ];
 
 foreach ($data as $input => $expected) {
