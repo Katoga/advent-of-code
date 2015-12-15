@@ -34,7 +34,8 @@ $commands = [
 	new Command\Day10\Part1(new AdventOfCode\Lib\Day10\Part1()),
 	new Command\Day10\Part2(new AdventOfCode\Lib\Day10\Part2()),
 	new Command\Day12\Part1(new AdventOfCode\Lib\Day12\Part1()),
-	new Command\Day12\Part2(new AdventOfCode\Lib\Day12\Part2())
+	new Command\Day12\Part2(new AdventOfCode\Lib\Day12\Part2()),
+	new Command\Day14\Part1(new AdventOfCode\Lib\Day14\Part1())
 ];
 
 $app = new Application();
