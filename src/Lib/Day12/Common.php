@@ -31,17 +31,5 @@ abstract class Common implements SolverInterface
 	 * @param array $array
 	 * @return int
 	 */
-	protected function sum(array $array)
-	{
-		$sum = 0;
-		foreach ($array as $item) {
-			if (is_array($item)) {
-				$sum += $this->sum($item);
-			} elseif (is_int($item) || is_numeric($item)) {
-				$sum += $item;
-			}
-		}
-
-		return $sum;
-	}
+	abstract protected function sum(array $array);
 }

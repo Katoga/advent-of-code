@@ -9,4 +9,23 @@ namespace AdventOfCode\Lib\Day12;
  */
 class Part1 extends Common
 {
+
+	/**
+	 *
+	 * @param array $array
+	 * @return int
+	 */
+	protected function sum(array $array)
+	{
+		$sum = 0;
+		foreach ($array as $item) {
+			if (is_array($item)) {
+				$sum += $this->sum($item);
+			} elseif (is_int($item) || is_numeric($item)) {
+				$sum += $item;
+			}
+		}
+
+		return $sum;
+	}
 }
