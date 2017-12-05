@@ -17,7 +17,7 @@ class Part2 extends Common
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Lib\Day5\Common::isNiceWord()
 	 */
-	protected function isNiceWord($word)
+	protected function isNiceWord(string $word): bool
 	{
 		return $this->hasTwinPair($word) && $this->hasInterleaf($word);
 	}
@@ -27,7 +27,7 @@ class Part2 extends Common
 	 * @param string $word
 	 * @return bool
 	 */
-	protected function hasTwinPair($word)
+	protected function hasTwinPair(string $word): bool
 	{
 		$passes = false;
 
@@ -56,7 +56,7 @@ class Part2 extends Common
 	 * @param string $word
 	 * @return bool
 	 */
-	protected function hasInterleaf($word)
+	protected function hasInterleaf(string $word): bool
 	{
 		$match = preg_match('~([a-z]).\1~', $word);
 

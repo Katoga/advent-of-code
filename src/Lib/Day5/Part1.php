@@ -36,7 +36,7 @@ class Part1 extends Common
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Lib\Day5\Common::isNiceWord()
 	 */
-	protected function isNiceWord($word)
+	protected function isNiceWord(string $word): bool
 	{
 		return $this->hasThreeWovels($word) && $this->hasDoubleLetter($word) && $this->lacksBadSequence($word);
 	}
@@ -46,7 +46,7 @@ class Part1 extends Common
 	 * @param string $word
 	 * @return bool
 	 */
-	protected function hasThreeWovels($word)
+	protected function hasThreeWovels(string $word): bool
 	{
 		$passes = false;
 
@@ -71,7 +71,7 @@ class Part1 extends Common
 	 * @param string $word
 	 * @return bool
 	 */
-	protected function hasDoubleLetter($word)
+	protected function hasDoubleLetter(string $word): bool
 	{
 		$match = preg_match('~([a-z])\1~', $word);
 
@@ -83,7 +83,7 @@ class Part1 extends Common
 	 * @param string $word
 	 * @return bool
 	 */
-	protected function lacksBadSequence($word)
+	protected function lacksBadSequence(string $word): bool
 	{
 		$passes = true;
 

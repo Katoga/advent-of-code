@@ -38,5 +38,5 @@ abstract class Common implements SolverInterface
 	 * @param string $word
 	 * @return bool
 	 */
-	abstract protected function isNiceWord($word);
+	abstract protected function isNiceWord(string $word): bool;
 }
