@@ -18,7 +18,7 @@ class Part2 extends Common
 	 * @param int $posX
 	 * @param int $posY
 	 */
-	protected function turnOn($posX, $posY)
+	protected function turnOn(int $posX, int $posY): void
 	{
 		$this->grid[$posX][$posY]++;
 	}
@@ -28,7 +28,7 @@ class Part2 extends Common
 	 * @param int $posX
 	 * @param int $posY
 	 */
-	protected function turnOff($posX, $posY)
+	protected function turnOff(int $posX, int $posY): void
 	{
 		if ($this->grid[$posX][$posY] > 0) {
 			$this->grid[$posX][$posY]--;
@@ -40,7 +40,7 @@ class Part2 extends Common
 	 * @param int $posX
 	 * @param int $posY
 	 */
-	protected function toggle($posX, $posY)
+	protected function toggle(int $posX, int $posY): void
 	{
 		$this->grid[$posX][$posY] += 2;
 	}
@@ -49,7 +49,7 @@ class Part2 extends Common
 	 *
 	 * @return int
 	 */
-	protected function getResult()
+	protected function getResult(): int
 	{
 		$brightness = 0;
 

@@ -53,7 +53,7 @@ abstract class Common implements SolverInterface
 		return $this->getResult();
 	}
 
-	protected function initGrid()
+	protected function initGrid(): void
 	{
 		$row = array_fill(0, static::GRID_SIZE, static::INITIAL_VALUE);
 
@@ -64,7 +64,7 @@ abstract class Common implements SolverInterface
 	 *
 	 * @param string $command
 	 */
-	protected function runCommand($command)
+	protected function runCommand(string $command): void
 	{
 		$commandParts = $this->parseCommand($command);
 
@@ -81,7 +81,7 @@ abstract class Common implements SolverInterface
 	 * @return array
 	 * @throws \RuntimeException
 	 */
-	protected function parseCommand($command)
+	protected function parseCommand(string $command): array
 	{
 		$parsed = [];
 
@@ -110,25 +110,25 @@ abstract class Common implements SolverInterface
 	 * @param int $posX
 	 * @param int $posY
 	 */
-	abstract protected function turnOn($posX, $posY);
+	abstract protected function turnOn(int $posX, int $posY): void;
 
 	/**
 	 *
 	 * @param int $posX
 	 * @param int $posY
 	 */
-	abstract protected function turnOff($posX, $posY);
+	abstract protected function turnOff(int $posX, int $posY): void;
 
 	/**
 	 *
 	 * @param int $posX
 	 * @param int $posY
 	 */
-	abstract protected function toggle($posX, $posY);
+	abstract protected function toggle(int $posX, int $posY): void;
 
 	/**
 	 *
 	 * @return int
 	 */
-	abstract protected function getResult();
+	abstract protected function getResult(): int;
 }
