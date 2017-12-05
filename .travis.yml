@@ -7,4 +7,5 @@ php:
 install: travis_retry composer install --no-interaction --optimize-autoloader
 
 script:
+  - vendor/bin/phpstan analyse --no-progress --level 7 src tests
   - vendor/bin/tester -s -p php tests
