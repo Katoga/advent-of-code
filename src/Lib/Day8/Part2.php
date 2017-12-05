@@ -15,7 +15,7 @@ class Part2 extends Common
 	 * @param string $line
 	 * @return int
 	 */
-	protected function getCharsCnt($line)
+	protected function getCharsCnt(string $line): int
 	{
 		return $this->getEscapedLength($line) - $this->getLiteralsLength($line);
 	}
@@ -25,7 +25,7 @@ class Part2 extends Common
 	 * @param string $string
 	 * @return int
 	 */
-	protected function getEscapedLength($string)
+	protected function getEscapedLength(string $string): int
 	{
 		// escape backslash
 		$string = str_replace('\\', '..', $string);

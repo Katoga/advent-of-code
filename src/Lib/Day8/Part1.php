@@ -15,7 +15,7 @@ class Part1 extends Common
 	 * @param string $line
 	 * @return int
 	 */
-	protected function getCharsCnt($line)
+	protected function getCharsCnt(string $line): int
 	{
 		return $this->getLiteralsLength($line) - $this->getDecodedLength($line);
 	}
@@ -25,7 +25,7 @@ class Part1 extends Common
 	 * @param string $string
 	 * @return int
 	 */
-	protected function getDecodedLength($string)
+	protected function getDecodedLength(string $string): int
 	{
 		// remove enclosing double quotes
 		$string = trim($string, '"');

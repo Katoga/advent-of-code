@@ -39,7 +39,7 @@ abstract class Common implements SolverInterface
 	 * @param string $string
 	 * @return int
 	 */
-	protected function getLiteralsLength($string)
+	protected function getLiteralsLength(string $string): int
 	{
 		return strlen($string);
 	}
@@ -48,5 +48,5 @@ abstract class Common implements SolverInterface
 	 * @param string $line
 	 * @return int
 	 */
-	abstract protected function getCharsCnt($line);
+	abstract protected function getCharsCnt(string $line): int;
 }
