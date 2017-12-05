@@ -16,7 +16,7 @@ class Part2 extends Common
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Lib\Day9\Common::getResult()
 	 */
-	protected function getResult(array $distances)
+	protected function getResult(array $distances): int
 	{
 		return max($distances);
 	}

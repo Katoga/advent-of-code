@@ -57,7 +57,7 @@ abstract class Common implements SolverInterface
 	 * @param string $route
 	 * @throws \RuntimeException
 	 */
-	protected function parseRoute($route)
+	protected function parseRoute(string $route): void
 	{
 		$matches = [];
 		if (preg_match('~^(?<loc1>[a-zA-Z]+) to (?<loc2>[a-zA-Z]+) = (?<distance>\d+)$~', $route, $matches) !== 1) {
@@ -84,7 +84,7 @@ abstract class Common implements SolverInterface
 	 * @param array $perms
 	 * @return array
 	 */
-	protected function getPaths(array $items, array $perms = [])
+	protected function getPaths(array $items, array $perms = []): array
 	{
 		if (empty($items)) {
 			$this->permutations[] = $perms;
@@ -96,16 +96,16 @@ abstract class Common implements SolverInterface
 				array_unshift($newperms, $foo);
 				$this->getPaths($newitems, $newperms);
 			}
-
-			return $this->permutations;
 		}
+
+		return $this->permutations;
 	}
 
 	/**
 	 *
 	 * @return array
 	 */
-	protected function getDistances()
+	protected function getDistances(): array
 	{
 		$paths = $this->getPaths(array_keys($this->locations));
 
@@ -139,5 +139,5 @@ abstract class Common implements SolverInterface
 	 * @param array $distances
 	 * @return int
 	 */
-	abstract protected function getResult(array $distances);
+	abstract protected function getResult(array $distances): int;
 }
