@@ -34,7 +34,7 @@ abstract class Common implements SolverInterface
 	 * @param string $input
 	 * @return int
 	 */
-	public function getSolution($input)
+	public function getSolution(string $input): int
 	{
 		ini_set('memory_limit', '1G');
 

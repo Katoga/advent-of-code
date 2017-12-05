@@ -23,7 +23,7 @@ abstract class Common implements SolverInterface
 	 * @param string $input
 	 * @return int
 	 */
-	public function getSolution($input)
+	public function getSolution(string $input): int
 	{
 		$solution = 0;
 

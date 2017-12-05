@@ -16,7 +16,7 @@ class Part1 extends Common
 	 * @param string $input
 	 * @return int
 	 */
-	public function getSolution($input)
+	public function getSolution(string $input): int
 	{
 		// start at 0~0
 		$posX = 0;

@@ -16,7 +16,7 @@ class Part1 extends Common
 	 * @param string $input
 	 * @return int
 	 */
-	public function getSolution($input)
+	public function getSolution(string $input): int
 	{
 		$up = substr_count($input, self::FLOOR_UP);
 		$down = substr_count($input, self::FLOOR_DOWN);

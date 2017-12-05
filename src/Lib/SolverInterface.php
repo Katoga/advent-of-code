@@ -16,5 +16,5 @@ interface SolverInterface
 	 * @param string $input
 	 * @return int
 	 */
-	public function getSolution($input);
+	public function getSolution(string $input): int;
 }
