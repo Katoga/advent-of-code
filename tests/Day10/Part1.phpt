@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 use Tester\Assert;
 
@@ -15,19 +16,19 @@ $data = [
 ];
 $data = [
 	'1' => [
-		1 => 11,
-		2 => 21,
-		3 => 1211,
-		4 => 111221,
-		5 => 312211,
-		6 => 13112221,
-		7 => 1113213211
+		1 => '11',
+		2 => '21',
+		3 => '1211',
+		4 => '111221',
+		5 => '312211',
+		6 => '13112221',
+		7 => '1113213211'
 	]
 ];
 
 foreach ($data as $input => $inputData) {
 	foreach ($inputData as $iterations => $expected) {
 		$solver->setIterations($iterations);
-		Assert::equal(strlen($expected), $solver->getSolution($input));
+		Assert::equal(strlen($expected), $solver->getSolution((string) $input));
 	}
 }
