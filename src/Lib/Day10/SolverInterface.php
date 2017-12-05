@@ -16,5 +16,5 @@ interface SolverInterface extends \AdventOfCode\Lib\SolverInterface
 	 *
 	 * @param int $iterations
 	 */
-	public function setIterations($iterations);
+	public function setIterations(int $iterations);
 }

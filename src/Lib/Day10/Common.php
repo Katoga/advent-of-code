@@ -40,7 +40,7 @@ abstract class Common implements SolverInterface
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Lib\Day10\SolverInterface::setIterations()
 	 */
-	public function setIterations($iterations)
+	public function setIterations(int $iterations)
 	{
 		if ($iterations > 40) {
 			ini_set('memory_limit', '1G');
@@ -54,7 +54,8 @@ abstract class Common implements SolverInterface
 	 * @param string $string
 	 * @return string
 	 */
-	protected function lookAndSay($string) {
+	protected function lookAndSay(string $string): string
+	{
 		$result = '';
 
 		$numbers = str_split($string);
