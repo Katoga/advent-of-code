@@ -18,7 +18,13 @@ abstract class Common implements SolverInterface
 	const STEP_EAST = '>';
 	const STEP_WEST = '<';
 
-	protected function doStep($step, $posX, $posY)
+	/**
+	 * @param string $step
+	 * @param int $posX
+	 * @param int $posY
+	 * @return array
+	 */
+	protected function doStep(string $step, int $posX, int $posY): array
 	{
 		switch ($step) {
 			case self::STEP_NORTH:
