@@ -1,5 +1,6 @@
 {
 	"name": "katoga/advent-of-code",
+	"description": "Solutions of https://adventofcode.com puzzles",
 	"type": "project",
 	"authors": [
 		{
