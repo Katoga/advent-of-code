@@ -19,7 +19,7 @@ class Part2 extends Common
 	 * @param array $array
 	 * @return int
 	 */
-	protected function sum(array $array)
+	protected function sum(array $array): int
 	{
 		$sum = 0;
 		$isArray = true;
@@ -33,7 +33,7 @@ class Part2 extends Common
 		}
 
 		foreach ($array as $key => $item) {
-			if (!$isArray && $this->isBadWord($item)) {
+			if (!$isArray && is_string($item) && ($item == static::BAD_WORD)) {
 				$sum = 0;
 				break;
 			} elseif (is_array($item)) {
@@ -44,15 +44,5 @@ class Part2 extends Common
 		}
 
 		return $sum;
-	}
-
-	/**
-	 *
-	 * @param string $word
-	 * @return bool
-	 */
-	protected function isBadWord($word)
-	{
-		return is_string($word) && ($word == static::BAD_WORD);
 	}
 }

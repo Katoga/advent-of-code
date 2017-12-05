@@ -33,5 +33,5 @@ abstract class Common implements SolverInterface
 	 * @param array $array
 	 * @return int
 	 */
-	abstract protected function sum(array $array);
+	abstract protected function sum(array $array): int;
 }

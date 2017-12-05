@@ -17,7 +17,7 @@ class Part1 extends Common
 	 * @param array $array
 	 * @return int
 	 */
-	protected function sum(array $array)
+	protected function sum(array $array): int
 	{
 		$sum = 0;
 		foreach ($array as $item) {
