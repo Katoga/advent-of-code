@@ -84,6 +84,7 @@ abstract class Common implements SolverInterface
 	 */
 	protected function getSignal($wire)
 	{
+		$signal = 0;
 		if (!isset($this->signals[$wire])) {
 			$instruction = $this->instructionStack[$wire];
 

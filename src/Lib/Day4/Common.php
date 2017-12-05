@@ -13,6 +13,8 @@ use AdventOfCode\Lib\SolverInterface;
  */
 abstract class Common implements SolverInterface
 {
+	const LEADING_ZEROS = 0;
+
 	/**
 	 *
 	 * @param string $input

@@ -13,6 +13,8 @@ use AdventOfCode\Lib\SolverInterface;
  */
 abstract class Common implements SolverInterface
 {
+	const INITIAL_VALUE = null;
+
 	const GRID_SIZE = 1000;
 
 	/**

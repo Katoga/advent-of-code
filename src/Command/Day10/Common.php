@@ -17,6 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class Common extends Commons
 {
+	const DEFAULT_CYCLES = 0;
+
 	const DESCRIPTION = 'Elves Look, Elves Say';
 
 	const SOLUTION_MESSAGE = 'After "%d" iterations';

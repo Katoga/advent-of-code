@@ -17,6 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 abstract class Commons extends Command
 {
+	const DESCRIPTION = '';
+	const SOLUTION_MESSAGE = '';
 
 	const OPTION_INPUT_DATA_NAME = 'input-data';
 

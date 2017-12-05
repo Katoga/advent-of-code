@@ -27,6 +27,11 @@ abstract class Common implements SolverInterface
 	protected $locations = [];
 
 	/**
+	 * @var array
+	 */
+	protected $permutations = [];
+
+	/**
 	 *
 	 * @param string $input
 	 * @return int
