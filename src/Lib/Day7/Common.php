@@ -55,7 +55,7 @@ abstract class Common implements SolverInterface
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Lib\Day7\SolverInterface::setOutputWire()
 	 */
-	public function setOutputWire($outputWire)
+	public function setOutputWire(string $outputWire): void
 	{
 		$this->outputWire = $outputWire;
 	}
@@ -64,7 +64,7 @@ abstract class Common implements SolverInterface
 	 *
 	 * @param string $inputStr
 	 */
-	protected function loadInstructionStack($inputStr)
+	protected function loadInstructionStack(string $inputStr): void
 	{
 		$instructions = explode(PHP_EOL, $inputStr);
 		foreach ($instructions as $instructionStr) {
@@ -82,7 +82,7 @@ abstract class Common implements SolverInterface
 	 * @param string $wire
 	 * @return int
 	 */
-	protected function getSignal($wire)
+	protected function getSignal(string $wire): int
 	{
 		$signal = 0;
 		if (!isset($this->signals[$wire])) {

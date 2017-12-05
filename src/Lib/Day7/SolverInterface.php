@@ -16,5 +16,5 @@ interface SolverInterface extends \AdventOfCode\Lib\SolverInterface
 	 *
 	 * @param string $outputWire
 	 */
-	public function setOutputWire($outputWire);
+	public function setOutputWire(string $outputWire): void;
 }
