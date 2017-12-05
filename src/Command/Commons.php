@@ -37,12 +37,27 @@ abstract class Commons extends Command
 	protected $inputData;
 
 	/**
+	 * @var string
+	 */
+	protected $year;
+	/**
+	 * @var string
+	 */
+	protected $day;
+	/**
+	 * @var string
+	 */
+	protected $part;
+
+	/**
 	 *
 	 * @param SolverInterface $solver
 	 */
 	public function __construct(SolverInterface $solver)
 	{
-		parent::__construct($this->getCommandFullName());
+		list(, , $this->year, $this->day, $this->part) = explode('\\', get_class($this));
+
+		parent::__construct(strtolower(sprintf('%s:%s%s', $this->year, $this->day, $this->part)));
 
 		$this->solver = $solver;
 	}
@@ -56,7 +71,7 @@ abstract class Commons extends Command
 				'Path to input file.',
 				$this->getDefaultInputSrc()
 			)
-			->setDescription(sprintf('%s (%s)', static::DESCRIPTION, $this->getCommandName()));
+			->setDescription(sprintf('%s (%s)', static::DESCRIPTION, $this->part));
 	}
 
 	/**
@@ -83,16 +98,16 @@ abstract class Commons extends Command
 	 *
 	 * @return string
 	 */
-	protected function getDefaultInputSrc()
+	protected function getDefaultInputSrc(): string
 	{
-		return sprintf('%s/%s/input.txt', __DIR__, $this->getCommandNamespace());
+		return sprintf('%s/%s/%s/input.txt', __DIR__, $this->year, $this->day);
 	}
 
 	/**
 	 *
 	 * @return string
 	 */
-	protected function getSolutionMessage()
+	protected function getSolutionMessage(): string
 	{
 		return static::SOLUTION_MESSAGE;
 	}
@@ -101,56 +116,8 @@ abstract class Commons extends Command
 	 *
 	 * @return int
 	 */
-	protected function getSolution()
+	protected function getSolution(): int
 	{
 		return $this->solver->getSolution($this->inputData);
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	protected function getCommandFullName()
-	{
-		return strtolower(sprintf('%s:%s', $this->getCommandNamespace(), $this->getCommandName()));
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	protected function getCommandName()
-	{
-		$fullClassNameParts = $this->getClassParts();
-
-		return end($fullClassNameParts);
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	protected function getCommandNamespace()
-	{
-		$fullClassNameParts = $this->getClassParts();
-
-		end($fullClassNameParts);
-
-		return prev($fullClassNameParts);
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	protected function getClassParts()
-	{
-		static $fullClassNameParts;
-
-		if (empty($fullClassNameParts)) {
-			$fullClassNameParts = explode('\\', get_class($this));
-		}
-
-		return $fullClassNameParts;
 	}
 }
