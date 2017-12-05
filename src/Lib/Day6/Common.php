@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace AdventOfCode\Lib\Day6;
 
 use AdventOfCode\Lib\SolverInterface;
@@ -88,7 +90,9 @@ abstract class Common implements SolverInterface
 		// normalize cmd ("turn on" -> "turnOn")
 		$cmdParts = explode(' ', $parsed['cmd']);
 		$parsed['cmd'] = array_shift($cmdParts);
-		$parsed['cmd'] .= ucfirst(reset($cmdParts));
+		if (!empty($cmdParts)) {
+			$parsed['cmd'] .= ucfirst(reset($cmdParts));
+		}
 
 		// normalize coordinates
 		$parsed['x1'] = (int) $parsed['x1'];

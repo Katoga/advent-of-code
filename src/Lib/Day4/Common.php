@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace AdventOfCode\Lib\Day4;
 
 use AdventOfCode\Lib\SolverInterface;

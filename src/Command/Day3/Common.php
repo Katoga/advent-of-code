@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace AdventOfCode\Command\Day3;
 
 use AdventOfCode\Command\Commons;
