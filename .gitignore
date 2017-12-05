@@ -2,10 +2,5 @@
 /vendor
 /composer.lock
 
-# Eclipse IDE
-/.project
-/.buildpath
-/.settings
-
 # Nette tester
 /tests/*/output
