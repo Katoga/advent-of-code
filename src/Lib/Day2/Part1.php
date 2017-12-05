@@ -16,7 +16,7 @@ class Part1 extends Common
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Lib\Day2\Common::getWrapAmount()
 	 */
-	protected function getWrapAmount($width, $length, $height)
+	protected function getWrapAmount(int $width, int $length, int $height): int
 	{
 		return 2 * $width * $length + 2 * $width * $height + 2 * $length * $height;
 	}
@@ -26,7 +26,7 @@ class Part1 extends Common
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Lib\Day2\Common::getWrapAmount()
 	 */
-	protected function getExtraAmount($width, $length, $height)
+	protected function getExtraAmount(int $width, int $length, int $height): int
 	{
 		return $width * $length;
 	}

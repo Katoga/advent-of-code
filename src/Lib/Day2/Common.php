@@ -37,9 +37,11 @@ abstract class Common implements SolverInterface
 	 * @param string $boxDimensions
 	 * @return int
 	 */
-	protected function getAmountForBox($boxDimensions)
+	protected function getAmountForBox(string $boxDimensions): int
 	{
 		$dimensions = explode(self::DIMENSIONS_SEPARATOR, $boxDimensions);
+
+		array_walk($dimensions, function(string &$item) { $item = (int) $item; });
 
 		sort($dimensions, SORT_NUMERIC);
 		list($width, $length, $height) = $dimensions;
@@ -57,7 +59,7 @@ abstract class Common implements SolverInterface
 	 * @param int $height
 	 * @return int
 	 */
-	abstract protected function getWrapAmount($width, $length, $height);
+	abstract protected function getWrapAmount(int $width, int $length, int $height): int;
 
 	/**
 	 *
@@ -66,5 +68,5 @@ abstract class Common implements SolverInterface
 	 * @param int $height
 	 * @return int
 	 */
-	abstract protected function getExtraAmount($width, $length, $height);
+	abstract protected function getExtraAmount(int $width, int $length, int $height): int;
 }

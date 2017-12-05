@@ -11,12 +11,12 @@ namespace AdventOfCode\Lib\Day2;
  */
 class Part2 extends Common
 {
-	protected function getWrapAmount($width, $length, $height)
+	protected function getWrapAmount(int $width, int $length, int $height): int
 	{
 		return 2 * $width + 2 * $length;
 	}
 
-	protected function getExtraAmount($width, $length, $height)
+	protected function getExtraAmount(int $width, int $length, int $height): int
 	{
 		return $width * $length * $height;
 	}
