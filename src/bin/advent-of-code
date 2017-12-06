@@ -1,5 +1,7 @@
 #!/usr/bin/env php
 <?php
+declare(strict_types=1);
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
@@ -13,28 +15,28 @@ use Symfony\Component\Console\Application;
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 $commands = [
-	new Command\Day1\Part1(new AdventOfCode\Lib\Day1\Part1()),
-	new Command\Day1\Part2(new AdventOfCode\Lib\Day1\Part2()),
-	new Command\Day2\Part1(new AdventOfCode\Lib\Day2\Part1()),
-	new Command\Day2\Part2(new AdventOfCode\Lib\Day2\Part2()),
-	new Command\Day3\Part1(new AdventOfCode\Lib\Day3\Part1()),
-	new Command\Day3\Part2(new AdventOfCode\Lib\Day3\Part2()),
-	new Command\Day4\Part1(new AdventOfCode\Lib\Day4\Part1()),
-	new Command\Day4\Part2(new AdventOfCode\Lib\Day4\Part2()),
-	new Command\Day5\Part1(new AdventOfCode\Lib\Day5\Part1()),
-	new Command\Day5\Part2(new AdventOfCode\Lib\Day5\Part2()),
-	new Command\Day6\Part1(new AdventOfCode\Lib\Day6\Part1()),
-	new Command\Day6\Part2(new AdventOfCode\Lib\Day6\Part2()),
-	new Command\Day7\Part1(new AdventOfCode\Lib\Day7\Part1()),
-	new Command\Day7\Part2(new AdventOfCode\Lib\Day7\Part2()),
-	new Command\Day8\Part1(new AdventOfCode\Lib\Day8\Part1()),
-	new Command\Day8\Part2(new AdventOfCode\Lib\Day8\Part2()),
-	new Command\Day9\Part1(new AdventOfCode\Lib\Day9\Part1()),
-	new Command\Day9\Part2(new AdventOfCode\Lib\Day9\Part2()),
-	new Command\Day10\Part1(new AdventOfCode\Lib\Day10\Part1()),
-	new Command\Day10\Part2(new AdventOfCode\Lib\Day10\Part2()),
-	new Command\Day12\Part1(new AdventOfCode\Lib\Day12\Part1()),
-	new Command\Day12\Part2(new AdventOfCode\Lib\Day12\Part2())
+	new Command\Y2015\D01\Part1(new AdventOfCode\Lib\Y2015\D01\Part1()),
+	new Command\Y2015\D01\Part2(new AdventOfCode\Lib\Y2015\D01\Part2()),
+	new Command\Y2015\D02\Part1(new AdventOfCode\Lib\Y2015\D02\Part1()),
+	new Command\Y2015\D02\Part2(new AdventOfCode\Lib\Y2015\D02\Part2()),
+	new Command\Y2015\D03\Part1(new AdventOfCode\Lib\Y2015\D03\Part1()),
+	new Command\Y2015\D03\Part2(new AdventOfCode\Lib\Y2015\D03\Part2()),
+	new Command\Y2015\D04\Part1(new AdventOfCode\Lib\Y2015\D04\Part1()),
+	new Command\Y2015\D04\Part2(new AdventOfCode\Lib\Y2015\D04\Part2()),
+	new Command\Y2015\D05\Part1(new AdventOfCode\Lib\Y2015\D05\Part1()),
+	new Command\Y2015\D05\Part2(new AdventOfCode\Lib\Y2015\D05\Part2()),
+	new Command\Y2015\D06\Part1(new AdventOfCode\Lib\Y2015\D06\Part1()),
+	new Command\Y2015\D06\Part2(new AdventOfCode\Lib\Y2015\D06\Part2()),
+	new Command\Y2015\D07\Part1(new AdventOfCode\Lib\Y2015\D07\Part1()),
+	new Command\Y2015\D07\Part2(new AdventOfCode\Lib\Y2015\D07\Part2()),
+	new Command\Y2015\D08\Part1(new AdventOfCode\Lib\Y2015\D08\Part1()),
+	new Command\Y2015\D08\Part2(new AdventOfCode\Lib\Y2015\D08\Part2()),
+	new Command\Y2015\D09\Part1(new AdventOfCode\Lib\Y2015\D09\Part1()),
+	new Command\Y2015\D09\Part2(new AdventOfCode\Lib\Y2015\D09\Part2()),
+	new Command\Y2015\D10\Part1(new AdventOfCode\Lib\Y2015\D10\Part1()),
+	new Command\Y2015\D10\Part2(new AdventOfCode\Lib\Y2015\D10\Part2()),
+	new Command\Y2015\D12\Part1(new AdventOfCode\Lib\Y2015\D12\Part1()),
+	new Command\Y2015\D12\Part2(new AdventOfCode\Lib\Y2015\D12\Part2())
 ];
 
 $app = new Application();
