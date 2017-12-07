@@ -16,21 +16,9 @@ class Part2 extends Common
 	 */
 	public function getSolution(string $input): int
 	{
-		$sum = 0;
+		$length = strlen($input);
 
-		$len = strlen($input);
-		$jump = $len / 2;
-
-		$input .= $input;
-
-		for ($i = 0; $i < $len; $i++) {
-			$current = substr($input, $i, 1);
-			$next = substr($input, $i + $jump, 1);
-			if ($current == $next) {
-				$sum += $current;
-			}
-		}
-
-		return $sum;
+		// duplicate the list - it is circular and the jump is long
+		return $this->getSum($input . $input, $length, $length / 2);
 	}
 }

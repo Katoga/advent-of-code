@@ -12,4 +12,18 @@ use AdventOfCode\Lib\SolverInterface;
  */
 abstract class Common implements SolverInterface
 {
+	protected function getSum(string $input, int $length, int $jump): int
+	{
+		$sum = 0;
+
+		for ($i = 0; $i < $length; $i++) {
+			$current = substr($input, $i, 1);
+			$next = substr($input, $i + $jump, 1);
+			if ($current == $next) {
+				$sum += $current;
+			}
+		}
+
+		return $sum;
+	}
 }
