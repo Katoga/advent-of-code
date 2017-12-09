@@ -10,35 +10,29 @@ namespace AdventOfCode\Lib\Y2017\D02;
  */
 class Part2 extends Common
 {
-	/**
-	 * @param string $input
-	 * @return int
-	 */
-	public function getSolution(string $input): int
+  /**
+   * @param array $numbers
+   * @return int
+   */
+	protected function getRowResult(array $numbers): int
 	{
-		$checksum = 0;
+		$result = 0;
 
-		$rows = explode(PHP_EOL, $input);
-		foreach ($rows as $row) {
-			if (!empty($row)) {
-				$numbers = explode("\t", $row);
-				rsort($numbers, SORT_NUMERIC);
-				$length = count($numbers);
-				for ($i = 0; $i <= $length; $i++) {
-					$dividend = $numbers[$i];
+		rsort($numbers, SORT_NUMERIC);
+		$length = count($numbers);
+		for ($i = 0; $i <= $length; $i++) {
+			$dividend = $numbers[$i];
 
-					for ($j = $i + 1; $j < $length; $j++) {
-						$divisor = $numbers[$j];
+			for ($j = $i + 1; $j < $length; $j++) {
+				$divisor = $numbers[$j];
 
-						if (($dividend % $divisor) == 0) {
-							$checksum += ($dividend / $divisor);
-							break 2;
-						}
-					}
+				if (($dividend % $divisor) == 0) {
+					$result = ($dividend / $divisor);
+					break 2;
 				}
 			}
 		}
 
-		return $checksum;
+		return $result;
 	}
 }

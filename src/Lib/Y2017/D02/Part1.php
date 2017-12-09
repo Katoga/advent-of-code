@@ -10,22 +10,12 @@ namespace AdventOfCode\Lib\Y2017\D02;
  */
 class Part1 extends Common
 {
-	/**
-	 * @param string $input
-	 * @return int
-	 */
-	public function getSolution(string $input): int
+  /**
+   * @param array $numbers
+   * @return int
+   */
+	protected function getRowResult(array $numbers): int
 	{
-		$checksum = 0;
-
-		$rows = explode(PHP_EOL, $input);
-		foreach ($rows as $row) {
-			if (!empty($row)) {
-				$numbers = explode("\t", $row);
-				$checksum += (max($numbers) - min($numbers));
-			}
-		}
-
-		return $checksum;
+		return (max($numbers) - min($numbers));
 	}
 }

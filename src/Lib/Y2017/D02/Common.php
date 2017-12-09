@@ -12,4 +12,28 @@ use AdventOfCode\Lib\SolverInterface;
  */
 abstract class Common implements SolverInterface
 {
+	/**
+	 * @param string $input
+	 * @return int
+	 */
+	public function getSolution(string $input): int
+	{
+		$checksum = 0;
+
+		$rows = explode(PHP_EOL, $input);
+		foreach ($rows as $row) {
+			if (!empty($row)) {
+				$numbers = explode("\t", $row);
+				$checksum += $this->getRowResult($numbers);
+			}
+		}
+
+		return $checksum;
+	}
+
+  /**
+   * @param array $numbers
+   * @return int
+   */
+  abstract protected function getRowResult(array $numbers): int;
 }
