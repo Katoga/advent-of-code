@@ -1,6 +1,8 @@
 # Katoga's "Advent of Code" solutions
 See https://adventofcode.com
 
+[![Build Status](https://travis-ci.org/Katoga/advent-of-code.svg?branch=master)](https://travis-ci.org/Katoga/advent-of-code)
+
 ## Usage
 ```sh
 composer install --no-dev --optimize-autoloader
