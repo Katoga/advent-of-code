@@ -10,30 +10,20 @@ namespace AdventOfCode\Lib\Y2017\D04;
  */
 class Part2 extends Common
 {
-	/**
-	 * @param string $input
-	 * @return int
-	 */
-	public function getSolution(string $input): int
-	{
-    $validPassphrases = 0;
+  /**
+   * @param string $phrase
+   * @return bool
+   */
+  protected function isValidPassphrase(string $phrase): bool
+  {
+    $words = preg_split('~[\s]+~', $phrase);
 
-    $rows = explode("\n", $input);
-
-    foreach ($rows as $row) {
-      if (!empty($row)) {
-        $words = preg_split('~[\s]+~', $row);
-        foreach ($words as &$word) {
-          $chars = str_split($word);
-          sort($chars);
-          $word = implode('', $chars);
-        }
-        if (count(array_unique($words)) == count($words)) {
-          $validPassphrases++;
-        }
-      }
+    foreach ($words as &$word) {
+      $chars = str_split($word);
+      sort($chars);
+      $word = implode('', $chars);
     }
 
-		return $validPassphrases;
-	}
+    return count(array_unique($words)) == count($words);
+  }
 }
