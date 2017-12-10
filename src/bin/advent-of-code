@@ -41,6 +41,7 @@ $commands = [
 	new Command\Y2017\D01\Part2(new AdventOfCode\Lib\Y2017\D01\Part2()),
 	new Command\Y2017\D02\Part1(new AdventOfCode\Lib\Y2017\D02\Part1()),
 	new Command\Y2017\D02\Part2(new AdventOfCode\Lib\Y2017\D02\Part2()),
+	new Command\Y2017\D04\Part1(new AdventOfCode\Lib\Y2017\D04\Part1()),
 ];
 
 $app = new Application();
