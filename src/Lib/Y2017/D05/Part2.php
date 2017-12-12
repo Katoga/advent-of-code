@@ -10,31 +10,18 @@ namespace AdventOfCode\Lib\Y2017\D05;
  */
 class Part2 extends Common
 {
-	/**
-	 * @param string $input
-	 * @return int
-	 */
-	public function getSolution(string $input): int
-	{
-    $steps = 0;
+  /**
+   * @param int $offset
+   * @return int
+   */
+  protected function getChange(int $offset): int
+  {
+    if ($offset >= 3) {
+      $change = -1;
+    } else {
+      $change = +1;
+    }
 
-    $rows = explode(PHP_EOL, trim($input));
-    $position = 0;
-    $lastPosition = count($rows) - 1;
-
-    do {
-      $oldPosition = $position;
-
-      $position += $rows[$position];
-
-      if ($rows[$oldPosition] >= 3) {
-        $rows[$oldPosition]--;
-      } else {
-        $rows[$oldPosition]++;
-      }
-
-      $steps++;
-    } while ($position >= 0 && $position <= $lastPosition);
-		return $steps;
+    return $change;
   }
 }
