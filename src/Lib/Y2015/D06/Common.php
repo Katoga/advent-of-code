@@ -27,7 +27,8 @@ abstract class Common implements SolverInterface
 	 *
 	 * @var string $pattern
 	 */
-	protected $pattern = '~^(?<cmd>turn on|turn off|toggle) (?<x1>\d{1,3}),(?<y1>\d{1,3}) through (?<x2>\d{1,3}),(?<y2>\d{1,3})$~';
+	protected $pattern =
+		'~^(?<cmd>turn on|turn off|toggle) (?<x1>\d{1,3}),(?<y1>\d{1,3}) through (?<x2>\d{1,3}),(?<y2>\d{1,3})$~';
 
 	/**
 	 *

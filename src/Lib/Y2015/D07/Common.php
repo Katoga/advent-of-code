@@ -103,7 +103,11 @@ abstract class Common implements SolverInterface
 				$inputWireSignal = $this->getSignal($matches['wire']);
 				// bitwise complement of input wire
 				$signal = ~$inputWireSignal;
-			} elseif (preg_match('~^(?<left>([a-z]+|\d+)) (?<op>AND|OR) (?<right>([a-z]+|\d+))$~', $instruction, $matches) === 1) {
+			} elseif (preg_match(
+				'~^(?<left>([a-z]+|\d+)) (?<op>AND|OR) (?<right>([a-z]+|\d+))$~',
+				$instruction,
+				$matches
+			) === 1) {
 				// get signal on left input wire
 				if (is_numeric($matches['left'])) {
 					$left = $matches['left'];
