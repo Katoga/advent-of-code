@@ -10,14 +10,14 @@ namespace AdventOfCode\Lib\Y2017\D04;
  */
 class Part1 extends Common
 {
-  /**
-   * @param string $phrase
-   * @return bool
-   */
-  protected function isValidPassphrase(string $phrase): bool
-  {
-    $words = preg_split('~[\s]+~', $phrase);
+	/**
+	 * @param string $phrase
+	 * @return bool
+	 */
+	protected function isValidPassphrase(string $phrase): bool
+	{
+		$words = preg_split('~[\s]+~', $phrase);
 
-    return count(array_unique($words)) == count($words);
-  }
+		return count(array_unique($words)) == count($words);
+	}
 }

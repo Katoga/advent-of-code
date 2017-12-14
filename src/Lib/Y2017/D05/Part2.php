@@ -10,18 +10,18 @@ namespace AdventOfCode\Lib\Y2017\D05;
  */
 class Part2 extends Common
 {
-  /**
-   * @param int $offset
-   * @return int
-   */
-  protected function getChange(int $offset): int
-  {
-    if ($offset >= 3) {
-      $change = -1;
-    } else {
-      $change = +1;
-    }
+	/**
+	 * @param int $offset
+	 * @return int
+	 */
+	protected function getChange(int $offset): int
+	{
+		if ($offset >= 3) {
+			$change = -1;
+		} else {
+			$change = +1;
+		}
 
-    return $change;
-  }
+		return $change;
+	}
 }

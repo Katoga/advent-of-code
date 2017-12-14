@@ -35,5 +35,5 @@ abstract class Common implements SolverInterface
    * @param array $numbers
    * @return int
    */
-  abstract protected function getRowResult(array $numbers): int;
+	abstract protected function getRowResult(array $numbers): int;
 }

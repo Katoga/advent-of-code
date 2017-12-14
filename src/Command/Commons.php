@@ -65,13 +65,13 @@ abstract class Commons extends Command
 	protected function configure()
 	{
 		$this->addOption(
-				self::OPTION_INPUT_DATA_NAME,
-				self::OPTION_INPUT_DATA_SHORT,
-				InputOption::VALUE_REQUIRED,
-				'Path to input file.',
-				$this->getDefaultInputSrc()
-			)
-			->setDescription(sprintf('%s (%s)', static::DESCRIPTION, $this->part));
+			self::OPTION_INPUT_DATA_NAME,
+			self::OPTION_INPUT_DATA_SHORT,
+			InputOption::VALUE_REQUIRED,
+			'Path to input file.',
+			$this->getDefaultInputSrc()
+		)
+		->setDescription(sprintf('%s (%s)', static::DESCRIPTION, $this->part));
 	}
 
 	/**

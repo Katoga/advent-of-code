@@ -10,20 +10,20 @@ namespace AdventOfCode\Lib\Y2017\D04;
  */
 class Part2 extends Common
 {
-  /**
-   * @param string $phrase
-   * @return bool
-   */
-  protected function isValidPassphrase(string $phrase): bool
-  {
-    $words = preg_split('~[\s]+~', $phrase);
+	/**
+	 * @param string $phrase
+	 * @return bool
+	 */
+	protected function isValidPassphrase(string $phrase): bool
+	{
+		$words = preg_split('~[\s]+~', $phrase);
 
-    foreach ($words as &$word) {
-      $chars = str_split($word);
-      sort($chars);
-      $word = implode('', $chars);
-    }
+		foreach ($words as &$word) {
+			$chars = str_split($word);
+			sort($chars);
+			$word = implode('', $chars);
+		}
 
-    return count(array_unique($words)) == count($words);
-  }
+		return count(array_unique($words)) == count($words);
+	}
 }
