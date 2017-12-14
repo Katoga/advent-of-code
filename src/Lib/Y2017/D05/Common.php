@@ -18,27 +18,27 @@ abstract class Common implements SolverInterface
 	 */
 	public function getSolution(string $input): int
 	{
-    $steps = 0;
+		$steps = 0;
 
-    $rows = explode(PHP_EOL, trim($input));
-    $position = 0;
-    $lastPosition = count($rows) - 1;
+		$rows = explode(PHP_EOL, trim($input));
+		$position = 0;
+		$lastPosition = count($rows) - 1;
 
-    do {
-      $oldPosition = $position;
+		do {
+			$oldPosition = $position;
 
-      $position += $rows[$position];
+			$position += $rows[$position];
 
-      $rows[$oldPosition] += $this->getChange((int) $rows[$oldPosition]);
+			$rows[$oldPosition] += $this->getChange((int) $rows[$oldPosition]);
 
-      $steps++;
-    } while ($position >= 0 && $position <= $lastPosition);
+			$steps++;
+		} while ($position >= 0 && $position <= $lastPosition);
 		return $steps;
-  }
+	}
 
-  /**
-   * @param int $offset
-   * @return int
-   */
-  abstract protected function getChange(int $offset): int;
+	/**
+	 * @param int $offset
+	 * @return int
+	 */
+	abstract protected function getChange(int $offset): int;
 }

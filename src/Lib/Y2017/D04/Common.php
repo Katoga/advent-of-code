@@ -18,24 +18,24 @@ abstract class Common implements SolverInterface
 	 */
 	public function getSolution(string $input): int
 	{
-    $validPassphrases = 0;
+		$validPassphrases = 0;
 
-    $rows = explode("\n", $input);
+		$rows = explode("\n", $input);
 
-    foreach ($rows as $row) {
-      if (!empty($row)) {
-        if ($this->isValidPassphrase($row)) {
-          $validPassphrases++;
-        }
-      }
-    }
+		foreach ($rows as $row) {
+			if (!empty($row)) {
+				if ($this->isValidPassphrase($row)) {
+					$validPassphrases++;
+				}
+			}
+		}
 
 		return $validPassphrases;
-  }
+	}
 
-  /**
-   * @param string $phrase
-   * @return bool
-   */
-  abstract protected function isValidPassphrase(string $phrase): bool;
+	/**
+	 * @param string $phrase
+	 * @return bool
+	 */
+	abstract protected function isValidPassphrase(string $phrase): bool;
 }

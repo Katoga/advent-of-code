@@ -10,12 +10,12 @@ namespace AdventOfCode\Lib\Y2017\D05;
  */
 class Part1 extends Common
 {
-  /**
-   * @param int $offset
-   * @return int
-   */
-  protected function getChange(int $offset): int
-  {
-    return 1;
-  }
+	/**
+	 * @param int $offset
+	 * @return int
+	 */
+	protected function getChange(int $offset): int
+	{
+		return 1;
+	}
 }

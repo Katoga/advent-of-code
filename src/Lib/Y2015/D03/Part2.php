@@ -41,9 +41,10 @@ class Part2 extends Common
 
 		$steps = str_split($input);
 		foreach ($steps as $step) {
-			list($posX[(int) $moving], $posY[(int) $moving]) = $this->doStep($step, $posX[(int) $moving], $posY[(int) $moving]);
+			$who = (int) $moving;
+			list($posX[$who], $posY[$who]) = $this->doStep($step, $posX[$who], $posY[$who]);
 
-			$visited[sprintf('%d~%d', $posX[(int) $moving], $posY[(int) $moving])] = true;
+			$visited[sprintf('%d~%d', $posX[$who], $posY[$who])] = true;
 
 			$moving = !$moving;
 		}

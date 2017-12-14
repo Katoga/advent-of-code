@@ -17,6 +17,6 @@ class Part1 extends Common
 	public function getSolution(string $input): int
 	{
 		// append first char to the end - the list is circular
-		return $this->getSum($input . substr($input, 0, 1), strlen($input),  1);
+		return $this->getSum($input . substr($input, 0, 1), strlen($input), 1);
 	}
 }

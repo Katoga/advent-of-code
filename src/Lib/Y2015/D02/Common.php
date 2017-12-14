@@ -41,7 +41,9 @@ abstract class Common implements SolverInterface
 	{
 		$dimensions = explode(self::DIMENSIONS_SEPARATOR, $boxDimensions);
 
-		array_walk($dimensions, function(string &$item) { $item = (int) $item; });
+		array_walk($dimensions, function (string &$item) {
+			$item = (int) $item;
+		});
 
 		sort($dimensions, SORT_NUMERIC);
 		list($width, $length, $height) = $dimensions;
