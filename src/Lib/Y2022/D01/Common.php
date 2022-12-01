@@ -13,4 +13,26 @@ use AdventOfCode\Lib\SolverInterface;
  */
 abstract class Common implements SolverInterface
 {
+	protected function getSums(string $input): array
+	{
+		$rows = explode(PHP_EOL, $input);
+
+		$sums = [];
+		$i = 0;
+
+		foreach ($rows as $row) {
+			if (!array_key_exists($i, $sums)) {
+				$sums[$i] = 0;
+			}
+
+			if ($row === '') {
+				$i++;
+				continue;
+			}
+
+			$sums[$i] += $row;
+		}
+
+		return $sums;
+	}
 }

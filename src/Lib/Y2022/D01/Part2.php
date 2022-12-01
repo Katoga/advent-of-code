@@ -9,7 +9,7 @@ namespace AdventOfCode\Lib\Y2022\D01;
  * @since 2022-12-01
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part1 extends Common
+class Part2 extends Common
 {
 	/**
 	 *
@@ -20,6 +20,8 @@ class Part1 extends Common
 	{
 		$sums = $this->getSums($input);
 
-		return max($sums);
+		rsort($sums, SORT_NUMERIC);
+
+		return array_sum(array_slice($sums, 0, 3));
 	}
 }
