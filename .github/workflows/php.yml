@@ -1,0 +1,206 @@
+name: PHP
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+env:
+  COMPOSER_VERSION: '2.4.4'
+  COMPOSER_LOCATION: /usr/local/bin/composer
+
+jobs:
+  validate:
+    strategy:
+      matrix:
+        php-version:
+          - '8.1'
+    runs-on: ubuntu-22.04
+    container:
+      image: php:${{ matrix.php-version }}-alpine
+      env:
+        COMPOSER_VERSION: "$COMPOSER_VERSION"
+        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install composer
+        run: |
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
+          sha256sum -c composer.phar.sha256sum
+          install -m 0755 composer.phar "$COMPOSER_LOCATION"
+          rm -f composer.phar*
+      - name: Validate composer.json and composer.lock
+        run: '"$COMPOSER_LOCATION" validate --strict'
+
+  install-dependencies:
+    needs:
+      - validate
+    strategy:
+      matrix:
+        php-version:
+          - '8.1'
+    runs-on: ubuntu-22.04
+    container:
+      image: php:${{ matrix.php-version }}-alpine
+      env:
+        COMPOSER_VERSION: "$COMPOSER_VERSION"
+        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install composer
+        run: |
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
+          sha256sum -c composer.phar.sha256sum
+          install -m 0755 composer.phar "$COMPOSER_LOCATION"
+          rm -f composer.phar*
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Install dependencies
+        run: '"$COMPOSER_LOCATION" install --no-interaction --optimize-autoloader'
+
+  test:
+    needs:
+      - install-dependencies
+    strategy:
+      matrix:
+        php-version:
+          - '8.1'
+    runs-on: ubuntu-22.04
+    container:
+      image: php:${{ matrix.php-version }}-alpine
+      env:
+        COMPOSER_VERSION: "$COMPOSER_VERSION"
+        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install composer
+        run: |
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
+          sha256sum -c composer.phar.sha256sum
+          install -m 0755 composer.phar "$COMPOSER_LOCATION"
+          rm -f composer.phar*
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Run test suite
+        run: ./vendor/bin/tester -s -p php tests
+
+  phpcpd:
+    needs:
+      - install-dependencies
+    strategy:
+      matrix:
+        php-version:
+          - '8.1'
+    runs-on: ubuntu-22.04
+    container:
+      image: php:${{ matrix.php-version }}-alpine
+      env:
+        COMPOSER_VERSION: "$COMPOSER_VERSION"
+        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install composer
+        run: |
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
+          sha256sum -c composer.phar.sha256sum
+          install -m 0755 composer.phar "$COMPOSER_LOCATION"
+          rm -f composer.phar*
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Run phpcpd
+        run: ./vendor/bin/phpcpd --fuzzy src tests
+
+  phpcs:
+    needs:
+      - install-dependencies
+    strategy:
+      matrix:
+        php-version:
+          - '8.1'
+    runs-on: ubuntu-22.04
+    container:
+      image: php:${{ matrix.php-version }}-alpine
+      env:
+        COMPOSER_VERSION: "$COMPOSER_VERSION"
+        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install composer
+        run: |
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
+          sha256sum -c composer.phar.sha256sum
+          install -m 0755 composer.phar "$COMPOSER_LOCATION"
+          rm -f composer.phar*
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Run phpcs
+        run: ./vendor/bin/phpcs --standard=phpcs_ruleset.xml src/ tests/
+
+  # phpstan:
+  #   needs:
+  #     - install-dependencies
+  #   strategy:
+  #     matrix:
+  #       php-version:
+  #         - '7.3'
+  #         - '7.4'
+  #   runs-on: ubuntu-22.04
+  #   container:
+  #     image: php:${{ matrix.php-version }}-alpine
+  #     env:
+  #       COMPOSER_VERSION: "$COMPOSER_VERSION"
+  #       COMPOSER_LOCATION: "$COMPOSER_LOCATION"
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Install composer
+  #       run: |
+  #         curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
+  #         curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
+  #         sha256sum -c composer.phar.sha256sum
+  #         install -m 0755 composer.phar "$COMPOSER_LOCATION"
+  #         rm -f composer.phar*
+  #     - name: Cache Composer packages
+  #       id: composer-cache
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: vendor
+  #         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-php-
+  #     - name: Run phpstan
+  #       run: ./vendor/bin/phpstan analyse --no-progress --level 7 src tests
