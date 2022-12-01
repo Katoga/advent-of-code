@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 env:
-  COMPOSER_VERSION: '1.10.26'
+  COMPOSER_VERSION: '2.4.4'
   COMPOSER_LOCATION: /usr/local/bin/composer
 
 jobs:
@@ -20,8 +20,8 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '7.3'
-          - '7.4'
+          - '8.0'
+          - '8.1'
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
@@ -46,8 +46,8 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '7.3'
-          - '7.4'
+          - '8.0'
+          - '8.1'
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
@@ -80,8 +80,8 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '7.3'
-          - '7.4'
+          - '8.0'
+          - '8.1'
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
@@ -114,8 +114,8 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '7.3'
-          - '7.4'
+          - '8.0'
+          - '8.1'
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
@@ -148,8 +148,8 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '7.3'
-          - '7.4'
+          - '8.0'
+          - '8.1'
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
