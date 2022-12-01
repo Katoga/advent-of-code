@@ -136,7 +136,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-php-
       - name: Run phpcpd
-        run: ./vendor/bin/phpcpd --no-interaction --fuzzy src tests
+        run: ./vendor/bin/phpcpd --fuzzy src tests
 
   phpcs:
     needs:
