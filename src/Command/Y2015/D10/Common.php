@@ -39,15 +39,6 @@ abstract class Common extends Commons
 	 */
 	protected $cycles;
 
-	/**
-	 *
-	 * @param SolverInterface $solver
-	 */
-	public function __construct(SolverInterface $solver)
-	{
-		parent::__construct($solver);
-	}
-
 	protected function configure()
 	{
 		parent::configure();

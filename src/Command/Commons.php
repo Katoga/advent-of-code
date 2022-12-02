@@ -49,17 +49,14 @@ abstract class Commons extends Command
 	 */
 	protected $part;
 
-	/**
-	 *
-	 * @param SolverInterface $solver
-	 */
-	public function __construct(SolverInterface $solver)
+	public function __construct()
 	{
 		list(, , $this->year, $this->day, $this->part) = explode('\\', get_class($this));
 
 		parent::__construct(strtolower(sprintf('%s:%s%s', $this->year, $this->day, $this->part)));
 
-		$this->solver = $solver;
+		$solverClassName = str_replace('Command', 'Lib', get_class($this));
+		$this->solver = new $solverClassName;
 	}
 
 	protected function configure()
