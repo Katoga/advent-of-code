@@ -53,8 +53,8 @@ class Part2 extends Common
 	{
 		$brightness = 0;
 
-		foreach ($this->grid as $x => $row) {
-			foreach ($row as $y => $field) {
+		foreach ($this->grid as $row) {
+			foreach ($row as $field) {
 				$brightness += $field;
 			}
 		}

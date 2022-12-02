@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AdventOfCode\Lib\Y2015\D06;
 
 use AdventOfCode\Lib\SolverInterface;
+use RuntimeException;
 
 /**
  *
@@ -87,7 +88,7 @@ abstract class Common implements SolverInterface
 		$parsed = [];
 
 		if (preg_match($this->pattern, $command, $parsed) !== 1) {
-			throw new \RuntimeException(sprintf('Invalid command "%s"', $command));
+			throw new RuntimeException(sprintf('Invalid command "%s"', $command));
 		}
 
 		// normalize cmd ("turn on" -> "turnOn")

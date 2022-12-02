@@ -18,19 +18,19 @@ abstract class Common implements SolverInterface
 		$rows = explode(PHP_EOL, $input);
 
 		$sums = [];
-		$i = 0;
+		$idx = 0;
 
 		foreach ($rows as $row) {
-			if (!array_key_exists($i, $sums)) {
-				$sums[$i] = 0;
+			if (!array_key_exists($idx, $sums)) {
+				$sums[$idx] = 0;
 			}
 
 			if ($row === '') {
-				$i++;
+				$idx++;
 				continue;
 			}
 
-			$sums[$i] += $row;
+			$sums[$idx] += $row;
 		}
 
 		return $sums;

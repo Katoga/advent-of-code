@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AdventOfCode\Lib\Y2015\D09;
 
 use AdventOfCode\Lib\SolverInterface;
+use RuntimeException;
 
 /**
  *
@@ -61,7 +62,7 @@ abstract class Common implements SolverInterface
 	{
 		$matches = [];
 		if (preg_match('~^(?<loc1>[a-zA-Z]+) to (?<loc2>[a-zA-Z]+) = (?<distance>\d+)$~', $route, $matches) !== 1) {
-			throw new \RuntimeException(sprintf('Failed to parse route "%s"', $route));
+			throw new RuntimeException(sprintf('Failed to parse route "%s"', $route));
 		}
 
 		// record all locations

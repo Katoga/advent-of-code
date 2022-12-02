@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace AdventOfCode\Lib\Y2015\D07;
 
+use RuntimeException;
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
@@ -73,12 +75,13 @@ abstract class Common implements SolverInterface
 		}
 
 		if (!array_key_exists($this->outputWire, $this->instructionStack)) {
-			throw new \RuntimeException(sprintf('Output wire "%s" will not get any signal!', $this->outputWire));
+			throw new RuntimeException(sprintf('Output wire "%s" will not get any signal!', $this->outputWire));
 		}
 	}
 
 	/**
 	 *
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
 	 * @param string $wire
 	 * @return int
 	 */
@@ -145,7 +148,7 @@ abstract class Common implements SolverInterface
 						break;
 				}
 			} else {
-				throw new \RuntimeException(sprintf('Wrong instruction "%s"', $instruction));
+				throw new RuntimeException(sprintf('Wrong instruction "%s"', $instruction));
 			}
 
 			$signal %= 65535;

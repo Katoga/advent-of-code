@@ -51,8 +51,8 @@ class Part1 extends Common
 	{
 		$cnt = 0;
 
-		foreach ($this->grid as $x => $row) {
-			foreach ($row as $y => $field) {
+		foreach ($this->grid as $row) {
+			foreach ($row as $field) {
 				if ($field) {
 					$cnt++;
 				}

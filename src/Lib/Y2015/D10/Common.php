@@ -25,8 +25,6 @@ abstract class Common implements SolverInterface
 	 */
 	public function getSolution(string $input): int
 	{
-		$solution = 0;
-
 		$string = $input;
 		for ($i = 0; $i < $this->iterations; $i++) {
 			$string = $this->lookAndSay($string);
