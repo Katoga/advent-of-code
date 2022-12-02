@@ -13,6 +13,10 @@ use AdventOfCode\Lib\SolverInterface;
  */
 abstract class Common implements SolverInterface
 {
+	/**
+	 * @param string $input
+	 * @return array<int>
+	 */
 	protected function getSums(string $input): array
 	{
 		$rows = explode(PHP_EOL, $input);

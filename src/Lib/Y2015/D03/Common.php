@@ -22,7 +22,7 @@ abstract class Common implements SolverInterface
 	 * @param string $step
 	 * @param int $posX
 	 * @param int $posY
-	 * @return array
+	 * @return array<int>
 	 */
 	protected function doStep(string $step, int $posX, int $posY): array
 	{

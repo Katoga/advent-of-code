@@ -31,9 +31,9 @@ abstract class Common implements SolverInterface
 		return $checksum;
 	}
 
-  /**
-   * @param array $numbers
-   * @return int
-   */
+	/**
+	 * @param array<int, string> $numbers
+	 * @return int
+	 */
 	abstract protected function getRowResult(array $numbers): int;
 }

@@ -48,8 +48,8 @@ abstract class Common implements SolverInterface
 		sort($dimensions, SORT_NUMERIC);
 		list($width, $length, $height) = $dimensions;
 
-		$wrap = $this->getWrapAmount($width, $length, $height);
-		$extra = $this->getExtraAmount($width, $length, $height);
+		$wrap = $this->getWrapAmount((int) $width, (int) $length, (int) $height);
+		$extra = $this->getExtraAmount((int) $width, (int) $length, (int) $height);
 
 		return $wrap + $extra;
 	}

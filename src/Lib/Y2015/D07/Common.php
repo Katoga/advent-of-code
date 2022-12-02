@@ -24,19 +24,19 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @var array
+	 * @var array<string>
 	 */
 	protected $instructionStack = [];
 
 	/**
 	 *
-	 * @var array
+	 * @var array<int>
 	 */
 	protected $signals = [];
 
 	/**
 	 *
-	 * @var array
+	 * @var array<int>
 	 */
 	protected $hackedWires = [];
 
@@ -141,10 +141,10 @@ abstract class Common implements SolverInterface
 				// shift in requested direction by requested bits
 				switch ($matches['dir']) {
 					case 'R':
-						$signal = $inputWireSignal >> $matches['bits'];
+						$signal = $inputWireSignal >> (int) $matches['bits'];
 						break;
 					case 'L':
-						$signal = $inputWireSignal << $matches['bits'];
+						$signal = $inputWireSignal << (int) $matches['bits'];
 						break;
 				}
 			} else {
@@ -155,9 +155,6 @@ abstract class Common implements SolverInterface
 
 			if ($signal < 0) {
 				$signal += 65536;
-			}
-			if ($signal > 65535) {
-				$signal -= 65536;
 			}
 
 			$this->signals[$wire] = $signal;

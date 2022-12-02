@@ -38,7 +38,7 @@ abstract class Common implements SolverInterface
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Lib\Y2015\D10\SolverInterface::setIterations()
 	 */
-	public function setIterations(int $iterations)
+	public function setIterations(int $iterations): void
 	{
 		if ($iterations > 40) {
 			ini_set('memory_limit', '1G');

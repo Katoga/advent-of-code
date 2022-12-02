@@ -17,18 +17,18 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @var array
+	 * @var array<int>
 	 */
 	protected $distances = [];
 
 	/**
 	 *
-	 * @var array
+	 * @var array<bool>
 	 */
 	protected $locations = [];
 
 	/**
-	 * @var array
+	 * @var array<mixed>
 	 */
 	protected $permutations = [];
 
@@ -76,14 +76,14 @@ abstract class Common implements SolverInterface
 		];
 		sort($connection);
 
-		$this->distances[implode(' ', $connection)] = $matches['distance'];
+		$this->distances[implode(' ', $connection)] = (int) $matches['distance'];
 	}
 
 	/**
 	 *
-	 * @param array $items
-	 * @param array $perms
-	 * @return array
+	 * @param array<string> $items
+	 * @param array<mixed> $perms
+	 * @return array<mixed>
 	 */
 	protected function getPaths(array $items, array $perms = []): array
 	{
@@ -104,7 +104,7 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @return array
+	 * @return array<int>
 	 */
 	protected function getDistances(): array
 	{
@@ -137,7 +137,7 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @param array $distances
+	 * @param array<int> $distances
 	 * @return int
 	 */
 	abstract protected function getResult(array $distances): int;

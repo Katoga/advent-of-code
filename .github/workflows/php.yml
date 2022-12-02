@@ -204,36 +204,35 @@ jobs:
       - name: Run phpcs
         run: ./vendor/bin/phpmd src,tests text ./phpmd_ruleset.xml
 
-  # phpstan:
-  #   needs:
-  #     - install-dependencies
-  #   strategy:
-  #     matrix:
-  #       php-version:
-  #         - '7.3'
-  #         - '7.4'
-  #   runs-on: ubuntu-22.04
-  #   container:
-  #     image: php:${{ matrix.php-version }}-alpine
-  #     env:
-  #       COMPOSER_VERSION: "$COMPOSER_VERSION"
-  #       COMPOSER_LOCATION: "$COMPOSER_LOCATION"
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Install composer
-  #       run: |
-  #         curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
-  #         curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
-  #         sha256sum -c composer.phar.sha256sum
-  #         install -m 0755 composer.phar "$COMPOSER_LOCATION"
-  #         rm -f composer.phar*
-  #     - name: Cache Composer packages
-  #       id: composer-cache
-  #       uses: actions/cache@v3
-  #       with:
-  #         path: vendor
-  #         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-  #         restore-keys: |
-  #           ${{ runner.os }}-php-
-  #     - name: Run phpstan
-  #       run: ./vendor/bin/phpstan analyse --no-progress --level 7 src tests
+  phpstan:
+    needs:
+      - install-dependencies
+    strategy:
+      matrix:
+        php-version:
+          - '8.1'
+    runs-on: ubuntu-22.04
+    container:
+      image: php:${{ matrix.php-version }}-alpine
+      env:
+        COMPOSER_VERSION: "$COMPOSER_VERSION"
+        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install composer
+        run: |
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
+          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
+          sha256sum -c composer.phar.sha256sum
+          install -m 0755 composer.phar "$COMPOSER_LOCATION"
+          rm -f composer.phar*
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+      - name: Run phpstan
+        run: ./vendor/bin/phpstan analyse --no-progress --level 8 src tests

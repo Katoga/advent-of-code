@@ -14,7 +14,7 @@ class Part1 extends Common
 
 	/**
 	 *
-	 * @param array $array
+	 * @param array<mixed> $array
 	 * @return int
 	 */
 	protected function sum(array $array): int
@@ -28,6 +28,6 @@ class Part1 extends Common
 			}
 		}
 
-		return $sum;
+		return (int) $sum;
 	}
 }

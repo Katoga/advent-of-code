@@ -20,7 +20,7 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @var array
+	 * @var array<int, array<int, mixed>>
 	 */
 	protected $grid = [];
 
@@ -80,7 +80,7 @@ abstract class Common implements SolverInterface
 	/**
 	 *
 	 * @param string $command
-	 * @return array
+	 * @return array<int|string>
 	 * @throws \RuntimeException
 	 */
 	protected function parseCommand(string $command): array

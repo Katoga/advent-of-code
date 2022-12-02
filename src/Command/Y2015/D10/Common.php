@@ -39,7 +39,7 @@ abstract class Common extends Commons
 	 */
 	protected $cycles;
 
-	protected function configure()
+	protected function configure(): void
 	{
 		parent::configure();
 
@@ -57,7 +57,7 @@ abstract class Common extends Commons
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Command\Commons::initialize()
 	 */
-	protected function initialize(InputInterface $input, OutputInterface $output)
+	protected function initialize(InputInterface $input, OutputInterface $output): void
 	{
 		parent::initialize($input, $output);
 

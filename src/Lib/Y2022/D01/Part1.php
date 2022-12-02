@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace AdventOfCode\Lib\Y2022\D01;
 
+use RuntimeException;
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
@@ -20,6 +22,11 @@ class Part1 extends Common
 	{
 		$sums = $this->getSums($input);
 
-		return max($sums);
+		$max = max($sums);
+		if ($max === false) {
+			throw new RuntimeException('Failed to get maximum.');
+		}
+
+		return $max;
 	}
 }

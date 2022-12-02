@@ -13,7 +13,7 @@ class Part2 extends Common
 {
 	/**
 	 *
-	 * @var array
+	 * @var array<int>
 	 */
 	protected $hackedWires = [
 		'b' => 46065
