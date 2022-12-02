@@ -11,21 +11,9 @@ namespace AdventOfCode\Lib\Y2022\D02;
  */
 class Part1 extends Common
 {
-	private const ROCK_OPFOR = 'A';
-	private const PAPER_OPFOR = 'B';
-	private const SCISSORS_OPFOR = 'C';
-
 	private const ROCK_ME = 'X';
 	private const PAPER_ME = 'Y';
 	private const SCISSORS_ME = 'Z';
-
-	private const POINTS_WIN = 6;
-	private const POINTS_TIE = 3;
-	private const POINTS_LOSE = 0;
-
-	private const POINTS_ROCK = 1;
-	private const POINTS_PAPER = 2;
-	private const POINTS_SCISSORS = 3;
 
 	private const POINTS = [
 		self::ROCK_OPFOR . ' ' . self::ROCK_ME => self::POINTS_TIE + self::POINTS_ROCK,
@@ -39,21 +27,8 @@ class Part1 extends Common
 		self::SCISSORS_OPFOR . ' ' . self::SCISSORS_ME => self::POINTS_TIE + self::POINTS_SCISSORS,
 	];
 
-	/**
-	 * @param string $input
-	 * @return int
-	 */
-	public function getSolution(string $input): int
+	protected function getPointsForRound(string $round): int
 	{
-		$rows = explode(PHP_EOL, $input);
-
-		$points = 0;
-		foreach ($rows as $row) {
-			if ($row) {
-				$points += self::POINTS[$row];
-			}
-		}
-
-		return $points;
+		return self::POINTS[$round];
 	}
 }
