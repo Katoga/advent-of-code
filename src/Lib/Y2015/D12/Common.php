@@ -30,7 +30,7 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @param array $array
+	 * @param array<mixed> $array
 	 * @return int
 	 */
 	abstract protected function sum(array $array): int;

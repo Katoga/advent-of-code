@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace AdventOfCode\Lib\Y2015\D08;
 
+use RuntimeException;
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
@@ -38,8 +40,12 @@ class Part1 extends Common
 
 		// decode hexadecimal char
 		$string = preg_replace_callback('~\\\x(?<ord>[a-f0-9]{2})~', function ($matches) {
-			return chr(hexdec($matches['ord']));
+			return chr((int) hexdec($matches['ord']));
 		}, $string);
+
+		if ($string === null) {
+			throw new RuntimeException('Failed to decode.');
+		}
 
 		return strlen($string);
 	}

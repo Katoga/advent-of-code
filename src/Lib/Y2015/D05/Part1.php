@@ -14,7 +14,7 @@ class Part1 extends Common
 
 	/**
 	 *
-	 * @var array
+	 * @var array<int>
 	 */
 	protected $vovels = [
 		97,
@@ -24,6 +24,10 @@ class Part1 extends Common
 		117
 	];
 
+	/**
+	 *
+	 * @var string[]
+	 */
 	protected $badSequences = [
 		'ab',
 		'cd',

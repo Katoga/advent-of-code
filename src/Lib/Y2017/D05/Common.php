@@ -27,7 +27,7 @@ abstract class Common implements SolverInterface
 		do {
 			$oldPosition = $position;
 
-			$position += $rows[$position];
+			$position += (int) $rows[$position];
 
 			$rows[$oldPosition] += $this->getChange((int) $rows[$oldPosition]);
 

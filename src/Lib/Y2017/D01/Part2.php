@@ -19,6 +19,6 @@ class Part2 extends Common
 		$length = strlen($input);
 
 		// duplicate the list - it is circular and the jump is long
-		return $this->getSum($input . $input, $length, $length / 2);
+		return $this->getSum($input . $input, $length, (int) ($length / 2));
 	}
 }

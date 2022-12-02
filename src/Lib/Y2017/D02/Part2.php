@@ -10,10 +10,10 @@ namespace AdventOfCode\Lib\Y2017\D02;
  */
 class Part2 extends Common
 {
-  /**
-   * @param array $numbers
-   * @return int
-   */
+	/**
+	 * @param array<int, string> $numbers
+	 * @return int
+	 */
 	protected function getRowResult(array $numbers): int
 	{
 		$result = 0;
@@ -21,10 +21,10 @@ class Part2 extends Common
 		rsort($numbers, SORT_NUMERIC);
 		$length = count($numbers);
 		for ($i = 0; $i <= $length; $i++) {
-			$dividend = $numbers[$i];
+			$dividend = (int) $numbers[$i];
 
 			for ($j = $i + 1; $j < $length; $j++) {
-				$divisor = $numbers[$j];
+				$divisor = (int) $numbers[$j];
 
 				if (($dividend % $divisor) == 0) {
 					$result = ($dividend / $divisor);

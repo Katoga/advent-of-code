@@ -9,47 +9,24 @@ declare(strict_types=1);
  * @license https://opensource.org/licenses/ISC ISC licence
  */
 
-use AdventOfCode\Command;
 use Symfony\Component\Console\Application;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$commands = [
-	new Command\Y2015\D01\Part1(new AdventOfCode\Lib\Y2015\D01\Part1()),
-	new Command\Y2015\D01\Part2(new AdventOfCode\Lib\Y2015\D01\Part2()),
-	new Command\Y2015\D02\Part1(new AdventOfCode\Lib\Y2015\D02\Part1()),
-	new Command\Y2015\D02\Part2(new AdventOfCode\Lib\Y2015\D02\Part2()),
-	new Command\Y2015\D03\Part1(new AdventOfCode\Lib\Y2015\D03\Part1()),
-	new Command\Y2015\D03\Part2(new AdventOfCode\Lib\Y2015\D03\Part2()),
-	new Command\Y2015\D04\Part1(new AdventOfCode\Lib\Y2015\D04\Part1()),
-	new Command\Y2015\D04\Part2(new AdventOfCode\Lib\Y2015\D04\Part2()),
-	new Command\Y2015\D05\Part1(new AdventOfCode\Lib\Y2015\D05\Part1()),
-	new Command\Y2015\D05\Part2(new AdventOfCode\Lib\Y2015\D05\Part2()),
-	new Command\Y2015\D06\Part1(new AdventOfCode\Lib\Y2015\D06\Part1()),
-	new Command\Y2015\D06\Part2(new AdventOfCode\Lib\Y2015\D06\Part2()),
-	new Command\Y2015\D07\Part1(new AdventOfCode\Lib\Y2015\D07\Part1()),
-	new Command\Y2015\D07\Part2(new AdventOfCode\Lib\Y2015\D07\Part2()),
-	new Command\Y2015\D08\Part1(new AdventOfCode\Lib\Y2015\D08\Part1()),
-	new Command\Y2015\D08\Part2(new AdventOfCode\Lib\Y2015\D08\Part2()),
-	new Command\Y2015\D09\Part1(new AdventOfCode\Lib\Y2015\D09\Part1()),
-	new Command\Y2015\D09\Part2(new AdventOfCode\Lib\Y2015\D09\Part2()),
-	new Command\Y2015\D10\Part1(new AdventOfCode\Lib\Y2015\D10\Part1()),
-	new Command\Y2015\D10\Part2(new AdventOfCode\Lib\Y2015\D10\Part2()),
-	new Command\Y2015\D12\Part1(new AdventOfCode\Lib\Y2015\D12\Part1()),
-	new Command\Y2015\D12\Part2(new AdventOfCode\Lib\Y2015\D12\Part2()),
+$commandClasses = glob(__DIR__ . '/../Command/Y20[1-2][0-9]/D[0-1][0-9]/Part[1-2].php');
+array_walk(
+	$commandClasses,
+	function(&$value, $key) {
+		$tmp = implode('\\', array_slice(explode('/', $value), -4));
+		$value = 'AdventOfCode\\' . substr($tmp, 0, strrpos($tmp, '.'));
+	}
+);
 
-	new Command\Y2017\D01\Part1(new AdventOfCode\Lib\Y2017\D01\Part1()),
-	new Command\Y2017\D01\Part2(new AdventOfCode\Lib\Y2017\D01\Part2()),
-	new Command\Y2017\D02\Part1(new AdventOfCode\Lib\Y2017\D02\Part1()),
-	new Command\Y2017\D02\Part2(new AdventOfCode\Lib\Y2017\D02\Part2()),
-	new Command\Y2017\D04\Part1(new AdventOfCode\Lib\Y2017\D04\Part1()),
-	new Command\Y2017\D04\Part2(new AdventOfCode\Lib\Y2017\D04\Part2()),
-	new Command\Y2017\D05\Part1(new AdventOfCode\Lib\Y2017\D05\Part1()),
-	new Command\Y2017\D05\Part2(new AdventOfCode\Lib\Y2017\D05\Part2()),
-
-	new Command\Y2022\D01\Part1(new AdventOfCode\Lib\Y2022\D01\Part1()),
-	new Command\Y2022\D01\Part2(new AdventOfCode\Lib\Y2022\D01\Part2()),
-];
+$commands = [];
+foreach ($commandClasses as $commandClass) {
+	$commandClass = $commandClass;
+	$commands[] = new $commandClass();
+}
 
 $app = new Application();
 $app->addCommands($commands);

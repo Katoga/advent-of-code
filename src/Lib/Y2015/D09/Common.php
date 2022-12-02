@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AdventOfCode\Lib\Y2015\D09;
 
 use AdventOfCode\Lib\SolverInterface;
+use RuntimeException;
 
 /**
  *
@@ -16,18 +17,18 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @var array
+	 * @var array<int>
 	 */
 	protected $distances = [];
 
 	/**
 	 *
-	 * @var array
+	 * @var array<bool>
 	 */
 	protected $locations = [];
 
 	/**
-	 * @var array
+	 * @var array<mixed>
 	 */
 	protected $permutations = [];
 
@@ -61,7 +62,7 @@ abstract class Common implements SolverInterface
 	{
 		$matches = [];
 		if (preg_match('~^(?<loc1>[a-zA-Z]+) to (?<loc2>[a-zA-Z]+) = (?<distance>\d+)$~', $route, $matches) !== 1) {
-			throw new \RuntimeException(sprintf('Failed to parse route "%s"', $route));
+			throw new RuntimeException(sprintf('Failed to parse route "%s"', $route));
 		}
 
 		// record all locations
@@ -75,14 +76,14 @@ abstract class Common implements SolverInterface
 		];
 		sort($connection);
 
-		$this->distances[implode(' ', $connection)] = $matches['distance'];
+		$this->distances[implode(' ', $connection)] = (int) $matches['distance'];
 	}
 
 	/**
 	 *
-	 * @param array $items
-	 * @param array $perms
-	 * @return array
+	 * @param array<string> $items
+	 * @param array<mixed> $perms
+	 * @return array<mixed>
 	 */
 	protected function getPaths(array $items, array $perms = []): array
 	{
@@ -103,7 +104,7 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @return array
+	 * @return array<int>
 	 */
 	protected function getDistances(): array
 	{
@@ -136,7 +137,7 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @param array $distances
+	 * @param array<int> $distances
 	 * @return int
 	 */
 	abstract protected function getResult(array $distances): int;

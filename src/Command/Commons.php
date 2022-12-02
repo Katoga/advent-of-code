@@ -8,6 +8,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use RuntimeException;
 
 /**
  *
@@ -49,20 +50,21 @@ abstract class Commons extends Command
 	 */
 	protected $part;
 
-	/**
-	 *
-	 * @param SolverInterface $solver
-	 */
-	public function __construct(SolverInterface $solver)
+	public function __construct()
 	{
 		list(, , $this->year, $this->day, $this->part) = explode('\\', get_class($this));
 
 		parent::__construct(strtolower(sprintf('%s:%s%s', $this->year, $this->day, $this->part)));
 
+		$solverClassName = str_replace('Command', 'Lib', get_class($this));
+		/**
+		 * @var SolverInterface
+		 */
+		$solver = new $solverClassName;
 		$this->solver = $solver;
 	}
 
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->addOption(
 			self::OPTION_INPUT_DATA_NAME,
@@ -79,9 +81,14 @@ abstract class Commons extends Command
 	 * {@inheritDoc}
 	 * @see \Symfony\Component\Console\Command\Command::initialize()
 	 */
-	protected function initialize(InputInterface $input, OutputInterface $output)
+	protected function initialize(InputInterface $input, OutputInterface $output): void
 	{
-		$this->inputData = file_get_contents($input->getOption(self::OPTION_INPUT_DATA_NAME));
+		$data = file_get_contents($input->getOption(self::OPTION_INPUT_DATA_NAME));
+		if ($data === false) {
+			throw new RuntimeException('Failed to load input data.');
+		}
+
+		$this->inputData = $data;
 	}
 
 	/**
@@ -89,7 +96,7 @@ abstract class Commons extends Command
 	 * {@inheritDoc}
 	 * @see \Symfony\Component\Console\Command\Command::execute()
 	 */
-	public function execute(InputInterface $input, OutputInterface $output)
+	public function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$output->writeln(sprintf('%s: %d', $this->getSolutionMessage(), $this->getSolution()));
 

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace AdventOfCode\Lib\Y2015\D09;
 
+use RuntimeException;
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
@@ -13,11 +15,16 @@ class Part1 extends Common
 {
 	/**
 	 *
-	 * {@inheritDoc}
-	 * @see \AdventOfCode\Lib\Y2015\D09\Common::getResult()
+	 * @param array<int> $distances
+	 * @return int
 	 */
 	protected function getResult(array $distances): int
 	{
-		return min($distances);
+		$min = min($distances);
+		if ($min === false) {
+			throw new RuntimeException('Failed to get minimum.');
+		}
+
+		return $min;
 	}
 }

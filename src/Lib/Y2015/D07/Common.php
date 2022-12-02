@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace AdventOfCode\Lib\Y2015\D07;
 
+use RuntimeException;
+
 /**
  *
  * @author Katoga <katoga.cz@hotmail.com>
@@ -22,19 +24,19 @@ abstract class Common implements SolverInterface
 
 	/**
 	 *
-	 * @var array
+	 * @var array<string>
 	 */
 	protected $instructionStack = [];
 
 	/**
 	 *
-	 * @var array
+	 * @var array<int>
 	 */
 	protected $signals = [];
 
 	/**
 	 *
-	 * @var array
+	 * @var array<int>
 	 */
 	protected $hackedWires = [];
 
@@ -73,12 +75,13 @@ abstract class Common implements SolverInterface
 		}
 
 		if (!array_key_exists($this->outputWire, $this->instructionStack)) {
-			throw new \RuntimeException(sprintf('Output wire "%s" will not get any signal!', $this->outputWire));
+			throw new RuntimeException(sprintf('Output wire "%s" will not get any signal!', $this->outputWire));
 		}
 	}
 
 	/**
 	 *
+	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
 	 * @param string $wire
 	 * @return int
 	 */
@@ -138,23 +141,20 @@ abstract class Common implements SolverInterface
 				// shift in requested direction by requested bits
 				switch ($matches['dir']) {
 					case 'R':
-						$signal = $inputWireSignal >> $matches['bits'];
+						$signal = $inputWireSignal >> (int) $matches['bits'];
 						break;
 					case 'L':
-						$signal = $inputWireSignal << $matches['bits'];
+						$signal = $inputWireSignal << (int) $matches['bits'];
 						break;
 				}
 			} else {
-				throw new \RuntimeException(sprintf('Wrong instruction "%s"', $instruction));
+				throw new RuntimeException(sprintf('Wrong instruction "%s"', $instruction));
 			}
 
 			$signal %= 65535;
 
 			if ($signal < 0) {
 				$signal += 65536;
-			}
-			if ($signal > 65535) {
-				$signal -= 65536;
 			}
 
 			$this->signals[$wire] = $signal;
