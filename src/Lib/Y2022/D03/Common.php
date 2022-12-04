@@ -14,4 +14,11 @@ use RuntimeException;
  */
 abstract class Common implements SolverInterface
 {
+	/**
+	 * @return array<string, int>
+	 */
+	protected function getCharPriorities(): array
+	{
+		return array_combine(range('a', 'z'), range(1, 26)) + array_combine(range('A', 'Z'), range(27, 52));
+	}
 }

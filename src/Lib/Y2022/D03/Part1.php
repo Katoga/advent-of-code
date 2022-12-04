@@ -15,7 +15,7 @@ class Part1 extends Common
 	{
 		$sumOfPriorities = 0;
 
-		$charPriorities = array_combine(range('a', 'z'), range(1, 26)) + array_combine(range('A', 'Z'), range(27, 52));
+		$charPriorities = $this->getCharPriorities();
 
 		$rucksacks = explode(PHP_EOL, $input);
 		foreach ($rucksacks as $rucksack) {
