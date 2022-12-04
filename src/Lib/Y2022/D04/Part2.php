@@ -11,14 +11,10 @@ use RuntimeException;
  * @since 2022-12-04
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part1 extends Common
+class Part2 extends Common
 {
 	protected function isOverlapping(array $pair): bool
 	{
-		return (
-			$pair[0][0] >= $pair[1][0] && $pair[0][1] <= $pair[1][1]
-		) || (
-			$pair[1][0] >= $pair[0][0] && $pair[1][1] <= $pair[0][1]
-		);
+		return ($pair[0][1] >= $pair[1][0]);
 	}
 }

@@ -13,4 +13,34 @@ use AdventOfCode\Lib\SolverInterface;
  */
 abstract class Common implements SolverInterface
 {
+	public function getSolution(string $input): int
+	{
+		$overlappingPairsCnt = 0;
+
+		$pairs = explode(PHP_EOL, $input);
+
+		foreach ($pairs as $pair) {
+			if ($pair) {
+				$pair = explode(',', $pair);
+				sort($pair, SORT_NATURAL);
+				/** @var string $range */
+				foreach ($pair as $key => $range) {
+					$pair[$key] = explode('-', $range);
+				}
+
+				/** @var array<int, array<int, int>> $pair */
+				if ($this->isOverlapping($pair)) {
+					$overlappingPairsCnt++;
+				}
+			}
+		}
+
+		return $overlappingPairsCnt;
+	}
+
+	/**
+	 * @param array<int, array<int, int>> $pair
+	 * @return bool
+	 */
+	abstract protected function isOverlapping(array $pair): bool;
 }
