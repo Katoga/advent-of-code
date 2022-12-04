@@ -22,7 +22,9 @@ array_walk(
 	}
 );
 
-$commands = [];
+$commands = [
+	new AdventOfCode\Command\Utils\Generator()
+];
 foreach ($commandClasses as $commandClass) {
 	$commandClass = $commandClass;
 	$commands[] = new $commandClass();
