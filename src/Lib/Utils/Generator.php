@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace AdventOfCode\Lib\Utils;
 
+use Latte;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\PhpFile;
 use Nette\PhpGenerator\PhpNamespace;
@@ -19,14 +20,17 @@ class Generator
 	protected string $pathCommand;
 	protected string $namespaceLib;
 	protected string $pathLib;
+	protected string $pathTests;
 
 	public function __construct(protected string $description, protected string $year, protected string $day)
 	{
 		$this->namespaceCommand = sprintf('AdventOfCode\Command\Y%d\D%\'.02d', $this->year, $this->day);
-		$this->pathCommand = sprintf('Command/Y%d/D%\'.02d', $this->year, $this->day);
+		$this->pathCommand = sprintf('src/Command/Y%d/D%\'.02d', $this->year, $this->day);
 
 		$this->namespaceLib = sprintf('AdventOfCode\Lib\Y%d\D%\'.02d', $this->year, $this->day);
-		$this->pathLib = sprintf('Lib/Y%d/D%\'.02d', $this->year, $this->day);
+		$this->pathLib = sprintf('src/Lib/Y%d/D%\'.02d', $this->year, $this->day);
+
+		$this->pathTests = sprintf('tests/Y%d/D%\'.02d', $this->year, $this->day);
 	}
 
 	public function generate(): void
@@ -39,44 +43,32 @@ class Generator
 		$libPart1 = $this->generateLibPart(Parts::One);
 		$libPart2 = $this->generateLibPart(Parts::Two);
 
-		$dir = sprintf(__DIR__ . '/../../%s/', $this->pathCommand);
+		$testsPart1 = $this->getTestPart(Parts::One);
+		$testsPart2 = $this->getTestPart(Parts::Two);
+
+		// command
+		$dir = sprintf(__DIR__ . '/../../../%s/', $this->pathCommand);
 		mkdir($dir, 0755, true);
 
-		$fullPath = sprintf('%s/Common.php', $dir);
-		if (file_put_contents($fullPath, $commandCommon) === false) {
-			throw new RuntimeException(sprintf('Failed to write file "%s"', $fullPath));
-		}
-		$fullPath = sprintf('%s/Part1.php', $dir);
-		if (file_put_contents($fullPath, $commandPart1) === false) {
-			throw new RuntimeException(sprintf('Failed to write file "%s"', $fullPath));
-		}
+		$this->writeFile(sprintf('%s/Common.php', $dir), $commandCommon->__toString());
+		$this->writeFile(sprintf('%s/Part1.php', $dir), $commandPart1->__toString());
+		$this->writeFile(sprintf('%s/Part2.php', $dir), $commandPart2->__toString());
+		$this->writeFile(sprintf('%s/input.txt', $dir), '');
 
-		$fullPath = sprintf('%s/Part2.php', $dir);
-		if (file_put_contents($fullPath, $commandPart2) === false) {
-			throw new RuntimeException(sprintf('Failed to write file "%s"', $fullPath));
-		}
-
-		$fullPath = sprintf('%s/input.txt', $dir);
-		if (file_put_contents($fullPath, '') === false) {
-			throw new RuntimeException(sprintf('Failed to write file "%s"', $fullPath));
-		}
-
-		$dir = sprintf(__DIR__ . '/../../%s/', $this->pathLib);
+		// lib
+		$dir = sprintf(__DIR__ . '/../../../%s/', $this->pathLib);
 		mkdir($dir, 0755, true);
 
-		$fullPath = sprintf('%s/Common.php', $dir);
-		if (file_put_contents($fullPath, $libCommon) === false) {
-			throw new RuntimeException(sprintf('Failed to write file "%s"', $fullPath));
-		}
-		$fullPath = sprintf('%s/Part1.php', $dir);
-		if (file_put_contents($fullPath, $libPart1) === false) {
-			throw new RuntimeException(sprintf('Failed to write file "%s"', $fullPath));
-		}
+		$this->writeFile(sprintf('%s/Common.php', $dir), $libCommon->__toString());
+		$this->writeFile(sprintf('%s/Part1.php', $dir), $libPart1->__toString());
+		$this->writeFile(sprintf('%s/Part2.php', $dir), $libPart2->__toString());
 
-		$fullPath = sprintf('%s/Part2.php', $dir);
-		if (file_put_contents($fullPath, $libPart2) === false) {
-			throw new RuntimeException(sprintf('Failed to write file "%s"', $fullPath));
-		}
+		// tests
+		$dir = sprintf(__DIR__ . '/../../../%s/', $this->pathTests);
+		mkdir($dir, 0755, true);
+
+		$this->writeFile(sprintf('%s/Part1.phpt', $dir), $testsPart1);
+		$this->writeFile(sprintf('%s/Part2.phpt', $dir), $testsPart2);
 	}
 
 	protected function generateCommandCommon(): PhpFile
@@ -186,5 +178,23 @@ class Generator
 		$file->addNamespace($namespace);
 
 		return $file;
+	}
+
+	protected function getTestPart(Parts $part): string
+	{
+		$latte = new Latte\Engine();
+		$params = [
+			'solverClass' => sprintf('%s\Part%d', $this->namespaceLib, $part->value)
+		];
+		$test = $latte->renderToString(__DIR__ . '/templates/Part.phpt.latte', $params);
+
+		return $test;
+	}
+
+	protected function writeFile(string $path, string $contents): void
+	{
+		if (file_put_contents($path, $contents) === false) {
+			throw new RuntimeException(sprintf('Failed to write file "%s"', $path));
+		}
 	}
 }
