@@ -2,4 +2,4 @@
 /vendor
 
 # Nette tester
-/tests/*/output
+/tests/**/output

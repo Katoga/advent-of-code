@@ -69,7 +69,7 @@ abstract class Common extends Commons
 	 * {@inheritDoc}
 	 * @see \AdventOfCode\Command\Commons::getSolution()
 	 */
-	protected function getSolution(): int
+	protected function getSolution(): int|string
 	{
 		$this->solver->setIterations($this->cycles);
 
