@@ -13,4 +13,22 @@ use AdventOfCode\Lib\SolverInterface;
  */
 abstract class Common implements SolverInterface
 {
+	protected const PACKET_MARKER_LENGTH = -1;
+
+	public function getSolution(string $input): int
+	{
+		$chars = str_split($input);
+		$start = 0;
+
+		$foursome = array_slice($chars, $start, static::PACKET_MARKER_LENGTH);
+		$uniqueChars = count(array_unique($foursome));
+
+		while ($uniqueChars != static::PACKET_MARKER_LENGTH) {
+			$start++;
+			$foursome = array_slice($chars, $start, static::PACKET_MARKER_LENGTH);
+			$uniqueChars = count(array_unique($foursome));
+		}
+
+		return $start + static::PACKET_MARKER_LENGTH;
+	}
 }

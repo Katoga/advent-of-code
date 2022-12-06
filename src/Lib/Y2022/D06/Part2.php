@@ -9,7 +9,7 @@ namespace AdventOfCode\Lib\Y2022\D06;
  * @since 2022-12-06
  * @license https://opensource.org/licenses/ISC ISC licence
  */
-class Part1 extends Common
+class Part2 extends Common
 {
-	protected const PACKET_MARKER_LENGTH = 4;
+	protected const PACKET_MARKER_LENGTH = 14;
 }
