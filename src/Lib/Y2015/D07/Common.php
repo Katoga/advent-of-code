@@ -79,12 +79,6 @@ abstract class Common implements SolverInterface
 		}
 	}
 
-	/**
-	 *
-	 * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-	 * @param string $wire
-	 * @return int
-	 */
 	protected function getSignal(string $wire): int
 	{
 		$signal = 0;
