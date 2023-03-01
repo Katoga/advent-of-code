@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AdventOfCode\Lib\Y2022\D01;
 
 use RuntimeException;
+use ValueError;
 
 /**
  *
@@ -22,8 +23,9 @@ class Part1 extends Common
 	{
 		$sums = $this->getSums($input);
 
-		$max = max($sums);
-		if ($max === false) {
+		try {
+			$max = max($sums);
+		} catch (ValueError $ve) {
 			throw new RuntimeException('Failed to get maximum.');
 		}
 
