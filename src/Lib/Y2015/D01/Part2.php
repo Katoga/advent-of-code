@@ -39,6 +39,11 @@ class Part2 extends Common
 		}
 
 		if ($basement) {
+			/**
+			 * Strange bug in phpstan
+			 * maybe related: https://github.com/phpstan/phpstan/issues/7706
+			 * @phpstan-ignore-next-line
+			 */
 			$step = $index + 1;
 		} else {
 			$step = 0;
