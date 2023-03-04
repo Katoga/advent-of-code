@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AdventOfCode\Lib\Y2017\D02;
 
 use RuntimeException;
+use ValueError;
 
 /**
  * @author Katoga <katoga.cz@hotmail.com>
@@ -18,10 +19,10 @@ class Part1 extends Common
 	 */
 	protected function getRowResult(array $numbers): int
 	{
-		$max = max($numbers);
-		$min = min($numbers);
-
-		if ($max === false || $min === false) {
+		try {
+			$max = max($numbers);
+			$min = min($numbers);
+		} catch (ValueError $ve) {
 			throw new RuntimeException('Failed to get extremes.');
 		}
 

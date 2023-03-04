@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AdventOfCode\Lib\Y2015\D09;
 
 use RuntimeException;
+use ValueError;
 
 /**
  *
@@ -20,8 +21,9 @@ class Part2 extends Common
 	 */
 	protected function getResult(array $distances): int
 	{
-		$max = max($distances);
-		if ($max === false) {
+		try {
+			$max = max($distances);
+		} catch (ValueError $ve) {
 			throw new RuntimeException('Failed to get maximum.');
 		}
 
