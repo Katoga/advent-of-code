@@ -16,7 +16,7 @@
 	"require-dev": {
 		"latte/latte": "~3.0.0",
 		"nette/php-generator": "~4.0.0",
-		"nette/tester": "~2.4.0",
+		"nette/tester": "~2.5.0",
 		"phpmd/phpmd": "~2.13.0",
 		"phpstan/phpstan": "~1.9.2",
 		"sebastian/phpcpd": "~6.0.3",
