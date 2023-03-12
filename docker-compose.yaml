@@ -1,0 +1,89 @@
+version: '3.8'
+
+services:
+  composer-install:
+    image: php:8.2-alpine
+    working_dir: /opt/advent-of-code
+    command:
+      - sh
+      - -c
+      - |
+        set -eu
+        apk add --no-cache gnupg
+        curl -LfSsO "https://getcomposer.org/download/latest-2.x/composer.phar"
+        curl -LfSsO "https://getcomposer.org/download/latest-2.x/composer.phar.asc"
+        gpg --receive-keys 161DFBE342889F01DDAC4E61CBB3D576F2A0946F
+        gpg --verify composer.phar.asc
+        install -m 0755 composer.phar /usr/local/bin/composer
+        rm -f composer.phar*
+        /usr/local/bin/composer install --no-interaction --optimize-autoloader
+        chown -R 1000:1000 *
+    volumes:
+      - ./:/opt/advent-of-code
+      - ~/.composer/cache:/root/.composer/cache
+
+  composer-update:
+    image: php:8.2-alpine
+    working_dir: /opt/advent-of-code
+    command:
+      - sh
+      - -c
+      - |
+        set -eu
+        apk add --no-cache gnupg
+        curl -LfSsO "https://getcomposer.org/download/latest-2.x/composer.phar"
+        curl -LfSsO "https://getcomposer.org/download/latest-2.x/composer.phar.asc"
+        gpg --receive-keys 161DFBE342889F01DDAC4E61CBB3D576F2A0946F
+        gpg --verify composer.phar.asc
+        install -m 0755 composer.phar /usr/local/bin/composer
+        rm -f composer.phar*
+        rm -rf ./vendor
+        /usr/local/bin/composer update
+        chown -R 1000:1000 *
+    volumes:
+      - ./:/opt/advent-of-code
+      - ~/.composer/cache:/root/.composer/cache
+
+  test:
+    image: php:8.2-alpine
+    working_dir: /opt/advent-of-code
+    command:
+      - ./vendor/bin/tester
+      - -s
+      - -p
+      - php
+      - tests
+    volumes:
+      - ./:/opt/advent-of-code
+
+  phpmd:
+    image: php:8.2-alpine
+    working_dir: /opt/advent-of-code
+    command:
+      - ./vendor/bin/phpmd
+      - src,tests
+      - text
+      - ./phpmd_ruleset.xml
+    volumes:
+      - ./:/opt/advent-of-code
+
+  phpcs:
+    image: php:8.2-alpine
+    working_dir: /opt/advent-of-code
+    command:
+      - ./vendor/bin/phpcs
+      - --standard=phpcs_ruleset.xml
+      - src/
+      - tests/
+    volumes:
+      - ./:/opt/advent-of-code
+
+  phpstan:
+    image: php:8.2-alpine
+    working_dir: /opt/advent-of-code
+    command:
+      - ./vendor/bin/phpstan
+      - analyse
+      - --no-progress
+    volumes:
+      - ./:/opt/advent-of-code
