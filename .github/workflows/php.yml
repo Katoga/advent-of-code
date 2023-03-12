@@ -11,12 +11,8 @@ on:
 permissions:
   contents: read
 
-env:
-  COMPOSER_VERSION: '2.4.4'
-  COMPOSER_LOCATION: /usr/local/bin/composer
-
 jobs:
-  validate:
+  get-composer:
     strategy:
       matrix:
         php-version:
@@ -24,20 +20,41 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
-      env:
-        COMPOSER_VERSION: "$COMPOSER_VERSION"
-        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
+    steps:
+      - name: Install Composer script
+        run: |
+          apk add --no-cache gnupg
+          curl -LfSsO "https://getcomposer.org/download/latest-2.x/composer.phar"
+          curl -LfSsO "https://getcomposer.org/download/latest-2.x/composer.phar.asc"
+          gpg --receive-keys 161DFBE342889F01DDAC4E61CBB3D576F2A0946F
+          gpg --verify composer.phar.asc
+          install -m 0755 composer.phar ./composer
+          rm -f composer.phar*
+      - name: Cache Composer script
+        uses: actions/cache/save@v3
+        with:
+          path: ./composer
+          key: ${{ runner.os }}-composer-2
+
+  validate:
+    needs:
+      - get-composer
+    strategy:
+      matrix:
+        php-version:
+          - '8.2'
+    runs-on: ubuntu-22.04
+    container:
+      image: php:${{ matrix.php-version }}-alpine
     steps:
       - uses: actions/checkout@v3
-      - name: Install composer
-        run: |
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
-          sha256sum -c composer.phar.sha256sum
-          install -m 0755 composer.phar "$COMPOSER_LOCATION"
-          rm -f composer.phar*
+      - name: Restore Composer script
+        uses: actions/cache/restore@v3
+        with:
+          path: ./composer
+          key: ${{ runner.os }}-composer-2
       - name: Validate composer.json and composer.lock
-        run: '"$COMPOSER_LOCATION" validate --strict'
+        run: './composer validate --strict'
 
   install-dependencies:
     needs:
@@ -49,28 +66,21 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
-      env:
-        COMPOSER_VERSION: "$COMPOSER_VERSION"
-        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
     steps:
       - uses: actions/checkout@v3
-      - name: Install composer
-        run: |
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
-          sha256sum -c composer.phar.sha256sum
-          install -m 0755 composer.phar "$COMPOSER_LOCATION"
-          rm -f composer.phar*
+      - name: Restore Composer script
+        uses: actions/cache/restore@v3
+        with:
+          path: ./composer
+          key: ${{ runner.os }}-composer-2
       - name: Cache Composer packages
         id: composer-cache
         uses: actions/cache@v3
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
       - name: Install dependencies
-        run: '"$COMPOSER_LOCATION" install --no-interaction --optimize-autoloader'
+        run: './composer install --no-interaction --optimize-autoloader'
 
   test:
     needs:
@@ -82,26 +92,14 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
-      env:
-        COMPOSER_VERSION: "$COMPOSER_VERSION"
-        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
     steps:
       - uses: actions/checkout@v3
-      - name: Install composer
-        run: |
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
-          sha256sum -c composer.phar.sha256sum
-          install -m 0755 composer.phar "$COMPOSER_LOCATION"
-          rm -f composer.phar*
-      - name: Cache Composer packages
+      - name: Restore Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
       - name: Run test suite
         run: ./vendor/bin/tester -s -p php tests
 
@@ -115,26 +113,14 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
-      env:
-        COMPOSER_VERSION: "$COMPOSER_VERSION"
-        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
     steps:
       - uses: actions/checkout@v3
-      - name: Install composer
-        run: |
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
-          sha256sum -c composer.phar.sha256sum
-          install -m 0755 composer.phar "$COMPOSER_LOCATION"
-          rm -f composer.phar*
-      - name: Cache Composer packages
+      - name: Restore Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
       - name: Run phpcs
         run: ./vendor/bin/phpcs --standard=phpcs_ruleset.xml src/ tests/
 
@@ -148,26 +134,14 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
-      env:
-        COMPOSER_VERSION: "$COMPOSER_VERSION"
-        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
     steps:
       - uses: actions/checkout@v3
-      - name: Install composer
-        run: |
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
-          sha256sum -c composer.phar.sha256sum
-          install -m 0755 composer.phar "$COMPOSER_LOCATION"
-          rm -f composer.phar*
-      - name: Cache Composer packages
+      - name: Restore Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
       - name: Run phpcs
         run: ./vendor/bin/phpmd src,tests text ./phpmd_ruleset.xml
 
@@ -181,25 +155,13 @@ jobs:
     runs-on: ubuntu-22.04
     container:
       image: php:${{ matrix.php-version }}-alpine
-      env:
-        COMPOSER_VERSION: "$COMPOSER_VERSION"
-        COMPOSER_LOCATION: "$COMPOSER_LOCATION"
     steps:
       - uses: actions/checkout@v3
-      - name: Install composer
-        run: |
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar"
-          curl -LfSsO "https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar.sha256sum"
-          sha256sum -c composer.phar.sha256sum
-          install -m 0755 composer.phar "$COMPOSER_LOCATION"
-          rm -f composer.phar*
-      - name: Cache Composer packages
+      - name: Restore Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: vendor
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
       - name: Run phpstan
         run: ./vendor/bin/phpstan analyse --no-progress
