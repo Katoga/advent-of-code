@@ -28,7 +28,6 @@ abstract class Common implements SolverInterface
 					$pair[$key] = explode('-', $range);
 				}
 
-				/** @var array<int, array<int, int>> $pair */
 				if ($this->isOverlapping($pair)) {
 					$overlappingPairsCnt++;
 				}
@@ -39,7 +38,7 @@ abstract class Common implements SolverInterface
 	}
 
 	/**
-	 * @param array<int, array<int, int>> $pair
+	 * @param array<int, array<int, string>|string> $pair
 	 * @return bool
 	 */
 	abstract protected function isOverlapping(array $pair): bool;
